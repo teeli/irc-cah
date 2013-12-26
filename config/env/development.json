@@ -1,0 +1,5 @@
+{
+    "server": "irc.saunalahti.fi",
+    "channels": ["#pi-cah-dev"],
+    "nick": "cah"
+}
