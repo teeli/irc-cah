@@ -1,6 +1,6 @@
 {
     "server":        "irc.saunalahti.fi",
-    "nick":          "cah",
+    "nick":          "cah-dev",
     "clientOptions": {
         "username": "horrible",
         "debug":    true,

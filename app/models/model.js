@@ -1,4 +1,5 @@
-var _ = require('underscore');
+var _ = require('underscore'),
+    helpers = require('../helpers/helpers');
 
 /**
  * Create a new Model
@@ -32,6 +33,9 @@ _.each(modelMethods, function (method) {
         return _[method].apply(_, args);
     };
 });
+
+
+Model.extend = helpers.extend;
 
 /**
  * Expose `Model()`

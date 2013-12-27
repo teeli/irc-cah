@@ -1,13 +1,12 @@
 var _ = require('underscore'),
-    Model = require('./model');
+    Backbone = require('backbone'),
+    Cards = require('../collections/cards');
 
 // Extend model
-var Player = _.extend(Model);
-
-// Define model
-_.extend(Player.prototype, {
+var Player = Backbone.Model.extend({
     defaults: {
-        name: 'unknown player'
+        nick:  'unknown player',
+        cards: new Cards()
     }
 });
 

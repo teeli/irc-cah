@@ -1,12 +1,11 @@
 var _ = require('underscore'),
-    Collection = require('./collection');
+    Backbone = require('backbone'),
+    Card = require('../models/card');
 
-var Cards = _.extend(Collection);
-
-// Define model
-_.extend(Cards.prototype, {
-    getRandom: function () {
-        return this.at(Math.round(Math.random() * this.length()));
+var Cards = Backbone.Collection.extend({
+    model:       Card,
+    shuffleDeck: function () {
+        this.reset(this.shuffle(), {silent: true});
     }
 });
 

@@ -1,6 +1,6 @@
 var _ = require('underscore'),
-    client,
     config,
+    client,
     commands = [],
     msgs = [];
 
@@ -37,23 +37,15 @@ function initGame(cl, co) {
             });
         }
         // build callback options
-        var uid = message.user + '@' + message.host;
-        var opts = {
-            uid:  uid,
-            args: cmdArgs,
-            config: config,
-            to: to
-        };
 
         if (config.clientOptions.channels.indexOf(to) >= 0) {
             // public commands
             _.each(commands, function (c) {
-                console.log(cmd, '==', c.cmd);
                 if (cmd === c.cmd) {
                     console.log('command: ' + c.cmd);
                     // check user mode
                     if (checkUserMode(message, c.mode)) {
-                        c.callback(client, opts);
+                        c.callback(client, message, cmdArgs);
                     }
                 }
             }, this);
@@ -64,7 +56,7 @@ function initGame(cl, co) {
                     console.log('command: ' + c.cmd);
                     // check user mode
                     if (checkUserMode(message, c.mode)) {
-                        c.callback(client, opts);
+                        c.callback(client, message, cmdArgs);
                     }
                 }
             }, this);
@@ -85,7 +77,6 @@ function checkUserMode(message, mode) {
  * @param cb Callback function
  */
 exports.cmd = function (cmd, mode, cb) {
-    console.log('add command', cmd, mode);
     commands.push({
         cmd:      cmd,
         mode:     mode,
@@ -100,7 +91,6 @@ exports.cmd = function (cmd, mode, cb) {
  * @param cb Callback function
  */
 exports.msg = function (cmd, mode, cb) {
-    console.log('add msg command', cmd, mode);
     msgs.push({
         cmd:      cmd,
         mode:     mode,

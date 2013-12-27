@@ -1,7 +1,10 @@
 var _ = require('underscore'),
-    Collection = require('./collection');
+    Backbone = require('backbone'),
+    Game = require('../models/game');
 
-var Games = _.extend(Collection);
+var Games = Backbone.Collection.extend({
+    model: Game
+});
 
 /**
  * Expose `Games()`
