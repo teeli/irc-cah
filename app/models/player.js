@@ -1,6 +1,19 @@
-exports.Player = Player;
+var _ = require('underscore'),
+    Model = require('./model');
 
-function Player(name) {
-    var self = this;
-    self.name = name;
-}
+// Extend model
+var Player = _.extend(Model);
+
+// Define model
+_.extend(Player.prototype, {
+    defaults: {
+        name: 'unknown player'
+    }
+});
+
+/**
+ * Expose `Player()`
+ */
+exports = module.exports = Player;
+
+

@@ -3,6 +3,7 @@
     "nick":          "cah",
     "clientOptions": {
         "username": "horrible",
+        "debug":    true,
         "channels": ["#pi-cah-dev"]
 
     }

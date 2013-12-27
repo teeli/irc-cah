@@ -1,6 +1,16 @@
-exports.Card = Card;
+var _ = require('underscore'),
+    Model = require('./model');
 
-function Card(type, data) {
-    var self = this;
-    self.type = type;
-}
+// Extend model
+var Card = _.extend(Model);
+
+// Define model
+_.extend(Card.prototype, {
+});
+
+/**
+ * Expose `Card()`
+ */
+exports = module.exports = Card;
+
+

@@ -2,12 +2,7 @@ var _ = require('underscore'),
     client,
     config,
     commands = [],
-    msgs = [],
-    haiku = { // TODO: Implement haiku round that ends the game
-        "draw": 2,
-        "pick": 3,
-        "text": "(Draw 2, Pick 3) Make a haiku."
-    };
+    msgs = [];
 
 /**
  * Expose `initGame()`
@@ -27,28 +22,39 @@ function initGame(cl, co) {
 
     client.addListener('message', function (from, to, text, message) {
         console.log('message from ' + from + ' to ' + to + ': ' + text);
-        var uid = message.user + '@' + message.host;
         // parse command
         var cmdArr = text.match(/^[\.|!](\w+)\s?(.*)$/);
+        if (!cmdArr || cmdArr.length <= 1) {
+            // command not found
+            return false;
+        }
         var cmd = cmdArr[1];
         // parse arguments
-        var cmdArgs = _.map(cmdArr[2].match(/(\w+)\s?/gi), function (str) {
-            return str.trim();
-        });
-        // build function arg object
-        var fArgs = {
+        var cmdArgs = [];
+        if (cmdArr.length > 2) {
+            cmdArgs = _.map(cmdArr[2].match(/(\w+)\s?/gi), function (str) {
+                return str.trim();
+            });
+        }
+        // build callback options
+        var uid = message.user + '@' + message.host;
+        var opts = {
             uid:  uid,
-            args: cmdArgs
+            args: cmdArgs,
+            config: config,
+            to: to
         };
 
-        if (config.channels.indexOf(to) >= 0) {
+        if (config.clientOptions.channels.indexOf(to) >= 0) {
             // public commands
             _.each(commands, function (c) {
                 console.log(cmd, '==', c.cmd);
                 if (cmd === c.cmd) {
                     console.log('command: ' + c.cmd);
-                    // TODO: check user mode
-                    c.callback(fArgs);
+                    // check user mode
+                    if (checkUserMode(message, c.mode)) {
+                        c.callback(client, opts);
+                    }
                 }
             }, this);
         } else if (config.nick === to) {
@@ -56,12 +62,20 @@ function initGame(cl, co) {
             _.each(msgs, function (c) {
                 if (cmd === c.cmd) {
                     console.log('command: ' + c.cmd);
-                    // TODO: check user mode
-                    c.callback(fArgs);
+                    // check user mode
+                    if (checkUserMode(message, c.mode)) {
+                        c.callback(client, opts);
+                    }
                 }
             }, this);
         }
     });
+}
+
+function checkUserMode(message, mode) {
+//    console.log('check mode: ', mode);
+//    console.log(message);
+    return true;
 }
 
 /**

@@ -30,6 +30,10 @@ client.addListener('join', function (channel, nick, message) {
     console.log('Joined ' + channel + ' as ' + nick);
 });
 
+client.addListener('error', function (message) {
+    console.log('error: ', message);
+});
+
 // init game
 var cah = game(client, config);
 
