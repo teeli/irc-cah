@@ -1,5 +1,9 @@
 {
-    "server": "irc.saunalahti.fi",
-    "channels": ["#pi-cah-dev"],
-    "nick": "cah"
+    "server":        "irc.saunalahti.fi",
+    "nick":          "cah",
+    "clientOptions": {
+        "username": "horrible",
+        "channels": ["#pi-cah-dev"]
+
+    }
 }

@@ -18,9 +18,7 @@ var config = require('./config/config');
 
 // init irc client
 console.log('Connecting to ' + config.server + ' as ' + config.nick + '...');
-var client = new irc.Client(config.server, config.nick, {
-    channels: config.channels
-});
+var client = new irc.Client(config.server, config.nick, config.clientOptions);
 
 // handle connection to server for logging
 client.addListener('registered', function (message) {
