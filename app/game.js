@@ -2,7 +2,12 @@ var _ = require('underscore'),
     client,
     config,
     commands = [],
-    msgs = [];
+    msgs = [],
+    haiku = { // TODO: Implement haiku round that ends the game
+        "draw": 2,
+        "pick": 3,
+        "text": "(Draw 2, Pick 3) Make a haiku."
+    };
 
 /**
  * Expose `initGame()`
@@ -19,6 +24,7 @@ function initGame(cl, co) {
     config = co;
     client = cl;
     console.log(config.cards.blacks.length + ' blacks and ' + config.cards.whites.length + ' whites loaded');
+
     client.addListener('message', function (from, to, text, message) {
         console.log('message from ' + from + ' to ' + to + ': ' + text);
         var uid = message.user + '@' + message.host;

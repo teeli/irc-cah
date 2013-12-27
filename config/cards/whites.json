@@ -1,7 +1,451 @@
-[
+﻿[
     {
-        "draw": 0,
-        "pick": 1,
-        "text": "Anthropologists have recently discovered a primitive tribe that worships %1"
+        "text": "____ kid-tested mother-approved."
+    },
+    {
+        "text": "____: good to the last drop."
+    },
+    {
+        "text": "____? There's an app for that."
+    },
+    {
+        "text": "____. Betcha can't have just one."
+    },
+    {
+        "text": "____. High five bro."
+    },
+    {
+        "text": "____. It's a trap!"
+    },
+    {
+        "text": "____. That's how I want to die."
+    },
+    {
+        "draw": 2,
+        "pick": 3,
+        "text": "(Draw 2, Pick 3) ____ + ____ = ____"
+    },
+    {
+        "draw": 2,
+        "pick": 3,
+        "text": "(Draw 2, Pick 3) I went from ____ to ____, all thanks to ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) ____ would be woefully incomplete without ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) ____ is a slippery slope that leads to ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) An international tribunal has found ____ guilty of ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) An the Academy Award for ____ goes to ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Before ____, all we had was ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Dear Sir or Madam, We regret to inform you that the office of ____ has denied your request for ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) For my next trick, I will pull ____ out of ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) I never truly understood ____ until I encountered ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) I spent my whole life working toward ____, only to have it ruined by ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) If God didn't want us to enjoy ____, he wouldn't have given us ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) In a pinch, ____ can be a suitable substitute for ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) In a world ravaged by ____, our only solace is ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) In M. Night Shamalan's new movie, Bruce Willis discovers that ____ had really been ____ all along."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Lifetime presents ____, the story of ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Michael Bay's new three-hour action epic pits ____ against ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Rumor has it that Vladimir Putin's favorite dish is ____ stuffed with ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) Step 1: ____ Step 2 ____ Step 3: Profit."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) That's right I killed ____. How you ask? ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) What's the next superhero/sidekick duo?"
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) When I was tripping on acid ____ turned into ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) You haven't truly lived until you've experienced ____ and ____ at the same time."
+    },
+    {
+        "text": "A romantic candlelit dinner would be incomplete without ____."
+    },
+    {
+        "text": "After blacking out during New Year's Eve, I was awoken by ____."
+    },
+    {
+        "text": "After months of debate, the Occupy Wall Street General Assembly could only agree on \"More ____!\""
+    },
+    {
+        "text": "After the earthquake, Sean Penn bought ____ to the people of Haiti."
+    },
+    {
+        "text": "Alternative medicine is now embracing the curative powers of ____."
+    },
+    {
+        "text": "And I would have gotten away with it, too, if it hadn't been for ____."
+    },
+    {
+        "text": "Anthropologists have recently discovered a primitive tribe that worships ____."
+    },
+    {
+        "text": "Before I run for president, I must destroy all evidence of my involvement with ____."
+    },
+    {
+        "text": "BILLY MAYS HERE FOR ____."
+    },
+    {
+        "text": "But before I kill you, Mr. Bond, I must show you ____."
+    },
+    {
+        "text": "Charades was ruined for me forever when my mom had to act out ____."
+    },
+    {
+        "text": "Coming to Broadway this season, ____: The Musical."
+    },
+    {
+        "text": "Dear Abby, I'm having some trouble with ____ and would like your advice."
+    },
+    {
+        "text": "During his midlife crisis, my dad got really into ____."
+    },
+    {
+        "text": "During Picasso's often-overlooked Brown Period, he produced hundreds of paintings of ____."
+    },
+    {
+        "text": "During sex, I like to think about ____."
+    },
+    {
+        "text": "Every Christmas my uncle gets drunk and tells the story about ____."
+    },
+    {
+        "text": "Everyone down on the ground! We don't want to hurt anyone. We're just here for ____."
+    },
+    {
+        "text": "He who controls ____ controls the world."
+    },
+    {
+        "text": "How am I maintaining my relationship status."
+    },
+    {
+        "text": "I do not know with what weapons World War III will be fought, but World War IV will be fought with."
+    },
+    {
+        "text": "I drink to forget ____."
+    },
+    {
+        "text": "I got 99 problems but ____ ain't one."
+    },
+    {
+        "text": "I learned the hard way that you can't cheer up a grieving friend with ____."
+    },
+    {
+        "text": "I'm sorry professor, but I couldn't complete my homework because of ____."
+    },
+    {
+        "text": "In 1,000 years when paper money is but a distant memory, ____ will be our currency."
+    },
+    {
+        "text": "In an attempt to reach a wider audience, the Smithsonian Museum of Natural History has opened an interactive exhibit on ____."
+    },
+    {
+        "text": "In his new self-produced album, Kanye West raps over the sounds of ____."
+    },
+    {
+        "text": "In his newest and most difficult stunt, David Blaine must escape from ____."
+    },
+    {
+        "text": "In its new tourism campaign, Detroit proclaims that it has finally eliminated ____."
+    },
+    {
+        "text": "In L.A. county Jail, word is you can trade 200 cigarettes for ____."
+    },
+    {
+        "text": "In Michael Jackson's final moments, he thought about ____."
+    },
+    {
+        "text": "In Rome, there are whisperings that the Vatican has a secret room devoted to ____."
+    },
+    {
+        "text": "In the distant future, historians will agree that ____ marked the beginning of America's decline."
+    },
+    {
+        "text": "In the new Disney Channel Original Movie, Hannah Montana struggles with ____ for the first time."
+    },
+    {
+        "text": "Instead of coal, Santa now gives the bad children ____ ."
+    },
+    {
+        "text": "It's a pity that kids these days are all getting involved with ____."
+    },
+    {
+        "text": "Jesus is ____."
+    },
+    {
+        "text": "Life for American Indians was forever changed when the White Man introduced them to ____."
+    },
+    {
+        "text": "Little Miss Muffet, Sat on a tuffet, Eating her curds and ____."
+    },
+    {
+        "text": "Major League Baseball has banned ____ for giving players an unfair advantage."
+    },
+    {
+        "text": "Maybe she's born with it. Maybe it's ____."
+    },
+    {
+        "text": "Members of New York's social elite are paying thousands of dollars just to experience ____."
+    },
+    {
+        "text": "MTV's new reality show features eight washed-up celebrities living with ____."
+    },
+    {
+        "text": "My country, 'tis of thee, sweet land of ____."
+    },
+    {
+        "pick": 2,
+        "text": "(Pick 2) My mom freaked out when she looked at my browser history and found ____.com/____."
+    },
+    {
+        "text": "My new favorite porn star is Joey \"____\" McGee."
+    },
+    {
+        "text": "Next from J.K. Rowling: Harry Potter and the Chamber of ____."
+    },
+    {
+        "text": "Next on ESPN2: The World Series of ____."
+    },
+    {
+        "text": "Next time on Dr. Phil: How to talk to your child about ____."
+    },
+    {
+        "text": "On the third day of Christmas, my true love game to me: three French hens, two turtle doves, and ____."
+    },
+    {
+        "text": "Only two things in life are certain: death and ____."
+    },
+    {
+        "text": "Science will never explain the origin of ____."
+    },
+    {
+        "text": "Studies show that lab rats navigate mazes 50% faster after being exposed to ____"
+    },
+    {
+        "text": "The CIA now interrogates enemy agents by repeatedly subjecting them to ____."
+    },
+    {
+        "text": "The class field trip was completely ruined by ____."
+    },
+    {
+        "text": "The Five Stages of Grief: denial, anger, bargaining, ____ acceptance."
+    },
+    {
+        "text": "The healing process began when I joined a support group for victims of ____."
+    },
+    {
+        "text": "The socialist governments of Scandanavia have declared that access to ____ is a basic human right."
+    },
+    {
+        "text": "The votes are in, and the new high school mascot is ____."
+    },
+    {
+        "text": "This holiday season, Tim Allen must overcome his fear of ____ to save Christmas."
+    },
+    {
+        "text": "This is the way the world ends This is the way the world ends Not with a bang but with ____."
+    },
+    {
+        "text": "This is your captain speaking. Fasten your seatbelts and prepare for ____."
+    },
+    {
+        "text": "This month's Cosmo: \"Spice up your sex life by bringing ____ into the bedroom.\""
+    },
+    {
+        "text": "This reason on Man vs. Wild, Bear Grylls must survive in the depths of the Amazon with only ____ and his wits."
+    },
+    {
+        "text": "Tonight on 20/20: What you don't know about ____ could kill you."
+    },
+    {
+        "text": "TSA guidelines now prohibit ____ on airplanes."
+    },
+    {
+        "text": "Wake up, America. Christmas is under attack by secular liberals and their ____."
+    },
+    {
+        "text": "War! What is it good for?"
+    },
+    {
+        "text": "What am I giving up for Lent?"
+    },
+    {
+        "text": "What are my parents hiding from me?"
+    },
+    {
+        "text": "What brought the orgy to a grinding halt?"
+    },
+    {
+        "text": "What did I bring back from Mexico?"
+    },
+    {
+        "text": "What did the US airdrop to the children of Afghanistan?"
+    },
+    {
+        "text": "What did Vin Diesel eat for dinner?"
+    },
+    {
+        "text": "What do old people smell like?"
+    },
+    {
+        "text": "What does Dick Cheney prefer?"
+    },
+    {
+        "text": "What don't you want to find in your Chinese food?"
+    },
+    {
+        "text": "What ended my last relationship?"
+    },
+    {
+        "text": "What gets better with age?"
+    },
+    {
+        "text": "What gives me uncontrollable gas?"
+    },
+    {
+        "text": "What has been making life difficult at the nudist colony?"
+    },
+    {
+        "text": "What helps Obama unwind?"
+    },
+    {
+        "text": "What is Batman's guilty pleasure?"
+    },
+    {
+        "text": "What keeps me warm during the cold, cold winter?"
+    },
+    {
+        "text": "What never fails to liven up the party?"
+    },
+    {
+        "text": "What people like ____."
+    },
+    {
+        "text": "What will always get you laid?"
+    },
+    {
+        "text": "What will I bring back in time to convince people that I am a powerful wizard?"
+    },
+    {
+        "text": "What would grandma find disturbing, yet oddly charming?"
+    },
+    {
+        "text": "What's a girl's best friend?"
+    },
+    {
+        "text": "What's my anti-drug?"
+    },
+    {
+        "text": "What's my secret power?"
+    },
+    {
+        "text": "What's Teach for America using to inspire inner city students to succeed?"
+    },
+    {
+        "text": "What's that smell?"
+    },
+    {
+        "text": "What's that sound?"
+    },
+    {
+        "text": "What's the crustiest?"
+    },
+    {
+        "text": "What's the gift that keeps on giving?"
+    },
+    {
+        "text": "What's the most emo?"
+    },
+    {
+        "text": "What's the new fad diet?"
+    },
+    {
+        "text": "What's the next Happy Meal toy?"
+    },
+    {
+        "text": "What's there a ton of in heaven?"
+    },
+    {
+        "text": "When all else fails, I can always masturbate to ____."
+    },
+    {
+        "text": "When I am a billionaire, I shall erect a 50-foot statue to commemorate ____."
+    },
+    {
+        "text": "When I am President of the United States, I will create the Department of ____."
+    },
+    {
+        "text": "When I pooped, what came out of my butt?"
+    },
+    {
+        "text": "When Pharaoh remained unmoved, Moses called down a Plague of ____."
+    },
+    {
+        "text": "When the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on ____."
+    },
+    {
+        "text": "Why am I sticky?"
+    },
+    {
+        "text": "Why can't I sleep at night?"
+    },
+    {
+        "text": "Why do I hurt all over?"
     }
 ]
