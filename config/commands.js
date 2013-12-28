@@ -7,5 +7,5 @@ module.exports = function(app) {
     app.cmd('cards', '', game.cards);
     app.cmd('play', '', game.play);
     app.cmd('list', '', game.list);
-
+    app.cmd('winner', '', game.winner);
 };
