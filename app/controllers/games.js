@@ -118,12 +118,7 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             var player = game.getPlayer({hostname: hostname});
-            if (typeof player !== 'undefined') {
-                client.notice(nick, nick + ', your cards are:');
-                _.each(player.cards.cards, function (card, index) {
-                    client.notice(nick, index + ': ' + card.text);
-                }, this);
-            }
+            game.showCards(player);
         }
     };
 
@@ -177,6 +172,23 @@ var Games = function Games() {
         } else {
             var player = game.getPlayer({hostname: hostname});
             game.selectWinner(player, cmdArgs[0]);
+        }
+    };
+
+    /**
+     * Show top players in current game
+     * @param client
+     * @param message
+     * @param cmdArgs
+     */
+    self.points = function(client, message, cmdArgs) {
+        var channel = message.args[0],
+            hostname = message.user + '@' + message.host,
+            game = self.findGame(channel);
+        if (typeof game === 'undefined') {
+            client.say(channel, 'No game running. Start the game by typing !start.');
+        } else {
+            game.showPoints();
         }
     };
 };

@@ -43,8 +43,8 @@ var Game = function Game(channel, client, config) {
         black: new Cards()
     };
     self.table = {
-        white: new Cards(),
-        black: new Cards()
+        white: null,
+        black: []
     };
     self.decks.white.shuffle();
     self.decks.black.shuffle();
@@ -52,9 +52,12 @@ var Game = function Game(channel, client, config) {
     /**
      * Stop game
      */
-    self.stop = function () {
+    self.stop = function (player) {
         self.state = STATES.STOPPED;
         // TODO: Destroy everything
+        if (typeof player !== 'undefined') {
+            self.say(player.nick + ' stopped the game (or at least would have if stopping was implemented)');
+        }
     };
 
     /**
@@ -81,11 +84,12 @@ var Game = function Game(channel, client, config) {
      * @returns Player The player object who is the new czar
      */
     self.setCzar = function () {
-        console.log('Old czar', self.czar);
+        if (self.czar) {
+            console.log('Old czar:', self.czar.nick);
+        }
         self.czar = self.players[self.players.indexOf(self.czar) + 1] || self.players[0];
-        console.log('New czar', self.czar);
-        console.log('index', self.players.indexOf(self.char));
-        self.czar.czar = true;
+        console.log('New czar:', self.czar.nick);
+        self.czar.isCzar = true;
         return self.czar;
     };
 
@@ -99,6 +103,9 @@ var Game = function Game(channel, client, config) {
                 var card = self.decks.black.pickCards();
                 player.cards.addCard(card);
                 card.owner = player;
+            }
+            if(!player.isCzar) {
+                self.showCards(player);
             }
         }, this);
     };
@@ -121,15 +128,20 @@ var Game = function Game(channel, client, config) {
         // move cards from table to discard
         self.discards.white.addCard(self.table.white);
         self.table.white = null;
-        var count = self.table.black.numCards();
-        for (var i = 0; i < count; i++) {
-            self.discards.black.addCard(self.table.black.pickCards(0));
-        }
+//        var count = self.table.black.length;
+        _.each(self.table.black, function (cards) {
+            _.each(cards.getCards(), function (card) {
+                card.owner = null;
+                self.discards.black.addCard(card);
+                cards.removeCard(card);
+            }, this);
+        }, this);
+        self.table.black = [];
 
         // reset players
         _.each(self.players, function (player) {
-            player.played = false;
-            player.czar = false;
+            player.hasPlayed = false;
+            player.isCzar = false;
         });
         // reset state
         self.state = STATES.STARTED;
@@ -141,27 +153,28 @@ var Game = function Game(channel, client, config) {
      * @param cards card indexes in players hand
      */
     self.playCard = function (player, cards) {
-        console.log('play card', arguments);
+        console.log(player.nick + ' played cards', cards.join(', '));
         if (self.state !== STATES.PLAYABLE) {
             self.say(player.nick + ': Can\'t play at the moment.');
         } else if (typeof player !== 'undefined') {
-            if (player.czar === true) {
+            if (player.isCzar === true) {
                 self.say(player.nick + ': You are the card czar. The czar does not play. The czar makes other people do his dirty work.');
             } else {
                 var blanks = self.table.white.text.match(/\%s/g);
                 var count = blanks ? blanks.length : 1;
-                if (player.played === true) {
+                if (player.hasPlayed === true) {
                     self.say(player.nick + ': You have already played on this round.');
                 }
                 if (cards.length != count) {
                     // invalid card count
                     self.say(player.nick + ': You must pick ' + count + ' cards.');
                 } else {
-                    // TODO: Handle multiple cards
-                    var card = player.cards.pickCards(cards[0]);
-                    self.table.black.addCard(card);
-                    player.played = true;
-                    if (_.where(self.players, {played: false, czar: false}).length === 0) {
+                    // get played cards
+                    var playerCards = player.cards.pickCards(cards);
+                    self.table.black.push(playerCards);
+                    player.hasPlayed = true;
+                    self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
+                    if (_.where(self.players, {hasPlayed: false, isCzar: false}).length === 0) {
                         // alright, everyone played
                         self.state = STATES.PLAYED;
                         self.showEntries();
@@ -178,8 +191,12 @@ var Game = function Game(channel, client, config) {
      */
     self.showEntries = function () {
         self.say('Everyone has played. Here are the entries:');
-        _.each(self.table.black.cards, function (card, i) {
-            self.say(i + ": " + util.format(self.table.white.text, card.text));
+        _.each(self.table.black, function (cards, i) {
+//            var args = [self.table.white.text];
+//            _.each(cards.getCards(), function (card) {
+//                args.push(card.text);
+//            }, this);
+            self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
         }, this);
         self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
     };
@@ -189,22 +206,41 @@ var Game = function Game(channel, client, config) {
      * @param index Index of the winning card in table list
      */
     self.selectWinner = function (player, index) {
-        var winner = self.table.black.cards[index];
+        var winner = self.table.black[index];
         if (self.state === STATES.PLAYED) {
-            if(player.czar === false) {
+            if (player !== self.czar) {
                 client.say(player.nick + ': You are not the card czar. Only the card czar can select the winner');
             } else if (typeof winner === 'undefined') {
                 self.say('Invalid winner');
             } else {
                 self.state = STATES.ROUND_END;
-                var owner = winner.owner;
-                winner.owner = null;
+                var owner = winner.cards[0].owner;
                 owner.points++;
-                self.say('Winner is: ' + owner.nick + ' with "' + util.format(self.table.white.text, winner.text) + '"! ' + owner.nick + ' has ' + owner.points + ' points');
+                // parse args for formatting
+//                var args = [self.table.white.text];
+//                _.each(winner.getCards(), function (card) {
+//                    args.push(card.text);
+//                }, this);
+                // announce winner
+                self.say('Winner is: ' + owner.nick + ' with "' + self.getFullEntry(self.table.white, winner.getCards()) + '"! ' + owner.nick + ' has ' + owner.points + ' points');
                 self.clean();
                 self.nextRound();
             }
         }
+    };
+
+    /**
+     * Get formatted entry
+     * @param white
+     * @param blacks
+     * @returns {*|Object|ServerResponse}
+     */
+    self.getFullEntry = function(white, blacks) {
+        var args = [white.text];
+        _.each(blacks, function (card) {
+            args.push(card.text);
+        }, this);
+        return util.format.apply(this, args);
     };
 
     /**
@@ -222,17 +258,11 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
-     * Find player by hostname
+     * Find player
      * @param search
      * @returns {*}
      */
     self.getPlayer = function (search) {
-//        var player;
-//        _.each(self.players, function (p) {
-//            if (p.hostname === hostname) {
-//                player = p;
-//            }
-//        }, self);
         return _.findWhere(self.players, search);
     };
 
@@ -251,6 +281,34 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Show players cards to player
+     * @param player
+     */
+    self.showCards = function (player) {
+        if (typeof player !== 'undefined') {
+            var cards = "";
+            _.each(player.cards.getCards(), function (card, index) {
+                cards += ' [' + index + '] ' + card.text;
+            }, this);
+            self.notice(player.nick, player.nick + ', your cards are:' + cards);
+        }
+    };
+
+    /**
+     * Show points for all players
+     */
+    self.showPoints = function () {
+        var sortedPlayers = _.sortBy(self.players, function (player) {
+            return -player.points;
+        });
+        var output = "";
+        _.each(sortedPlayers, function (player) {
+            output += player.nick + " " + player.points + " points, ";
+        });
+        self.say(output.slice(0, -2));
+    };
+
+    /**
      * Public message to the game channel
      * @param string
      */
@@ -258,12 +316,19 @@ var Game = function Game(channel, client, config) {
         self.client.say(self.channel, string);
     };
 
+    self.pm = function (nick, string) {
+        self.client.say(nick, string);
+    };
+
+    self.notice = function (nick, string) {
+        self.client.notice(nick, string);
+    };
+
     // announce the game on the channel
     self.say('A new game of Cards Against Humanity. The game start in 30 seconds. Type !join to join the game any time.');
 
     // wait for players to join
     self.startTimeout = setTimeout(self.nextRound, 10000);
-    console.log('Game initilized. Timeout id: ', self.startTimeout);
 
 };
 

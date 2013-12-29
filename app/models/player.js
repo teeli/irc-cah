@@ -7,8 +7,8 @@ var Player = function Player(nick, hostname) {
     self.nick = nick;
     self.hostname = hostname;
     self.cards = new Cards();
-    self.played = false;
-    self.czar = false;
+    self.hasPlayed = false;
+    self.isCzar = false;
     self.points = 0;
 };
 
