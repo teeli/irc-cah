@@ -1,18 +1,14 @@
-var _ = require('underscore'),
-    Backbone = require('backbone');
+var _ = require('underscore');
 
-// Extend model
-var Card = Backbone.Model.extend({
-    defaults: {
-        draw: 0,
-        pick: 0,
-        text: 'A bug in the mainframe (please file a bug report, if you actually get this card)'
-    }
-});
+var Card = function Card(card) {
+    var self = this;
+    self.id = _.uniqueId();
+    self.draw = card.draw || 0;
+    self.pick = card.pick || 0;
+    self.text = card.text || 'A bug in the mainframe (please file a bug report, if you actually get this card)';
+};
 
 /**
  * Expose `Card()`
  */
 exports = module.exports = Card;
-
-

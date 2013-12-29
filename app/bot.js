@@ -1,24 +1,37 @@
 var _ = require('underscore'),
-    config,
+    irc = require('irc'),
+    config = require('../config/config'),
     client,
     commands = [],
     msgs = [];
 
-/**
- * Expose `initGame()`
- */
-exports = module.exports = initGame;
+function checkUserMode(message, mode) {
+    return true;
+}
 
 /**
- * Initialize the game
- * @param cl IRC client object
- * @param co Object that contains config data for the game
+ * Initialize the bot
  */
-function initGame(cl, co) {
-    console.log('init game');
-    config = co;
-    client = cl;
-    console.log(config.cards.blacks.length + ' blacks and ' + config.cards.whites.length + ' whites loaded');
+exports.init = function() {
+    console.log('Initializing...');
+    // init irc client
+    console.log('Connecting to ' + config.server + ' as ' + config.nick + '...');
+    client = new irc.Client(config.server, config.nick, config.clientOptions);
+
+    // handle connection to server for logging
+    client.addListener('registered', function (message) {
+        console.log('Connected to server ' + message.server);
+    });
+
+    // handle joins to channels for logging
+    client.addListener('join', function (channel, nick, message) {
+        console.log('Joined ' + channel + ' as ' + nick);
+    });
+
+    // handle errors
+    client.addListener('error', function (message) {
+        console.log('error: ', message);
+    });
 
     client.addListener('message', function (from, to, text, message) {
         console.log('message from ' + from + ' to ' + to + ': ' + text);
@@ -62,13 +75,7 @@ function initGame(cl, co) {
             }, this);
         }
     });
-}
-
-function checkUserMode(message, mode) {
-//    console.log('check mode: ', mode);
-//    console.log(message);
-    return true;
-}
+};
 
 /**
  * Add a public command to the bot

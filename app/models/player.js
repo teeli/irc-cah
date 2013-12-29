@@ -1,29 +1,18 @@
 var _ = require('underscore'),
-    Backbone = require('backbone'),
-    Cards = require('../collections/cards');
+    Cards = require('../controllers/cards');
 
-// Extend model
-var Player = Backbone.Model.extend({
-    defaults:   {
-        nick:   'unknown player',
-        czar:   false,
-        played: false,
-        points: 0
-    },
-    initialize: function () {
-        console.log('Initialize player ' + this.get('nick'));
-        this.set({
-            cards: new Cards()
-        });
-    },
-    addPoint: function() {
-        this.set('points', this.get('points') + 1);
-    }
-});
+var Player = function Player(nick, hostname) {
+    var self = this;
+    self.id = _.uniqueId();
+    self.nick = nick;
+    self.hostname = hostname;
+    self.cards = new Cards();
+    self.played = false;
+    self.czar = false;
+    self.points = 0;
+};
 
 /**
  * Expose `Player()`
  */
 exports = module.exports = Player;
-
-

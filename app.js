@@ -3,39 +3,14 @@
  * main application script
  * @author Teemu Lahti <teemu.lahti@gmail.com>
  */
-console.log('Initializing Cards Against Humanity bot');
-
-// dependencies
-var _ = require('underscore'),
-    irc = require('irc'),
-    game = require('./app/game.js');
+console.log('Cards Against Humanity IRC bot');
 
 // Set node env
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-// app config
-var config = require('./config/config');
+// dependencies
+var bot = require('./app/bot');
 
-// init irc client
-console.log('Connecting to ' + config.server + ' as ' + config.nick + '...');
-var client = new irc.Client(config.server, config.nick, config.clientOptions);
-
-// handle connection to server for logging
-client.addListener('registered', function (message) {
-    console.log('Connected to server ' + message.server);
-});
-
-// handle joins to channels for logging
-client.addListener('join', function (channel, nick, message) {
-    console.log('Joined ' + channel + ' as ' + nick);
-});
-
-// handle errors
-client.addListener('error', function (message) {
-    console.log('error: ', message);
-});
-
-// init game
-var cah = game(client, config);
-
-require('./config/commands.js')(game);
+// init the bot
+bot.init();
+require('./config/commands.js')(bot);

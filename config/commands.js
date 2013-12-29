@@ -1,11 +1,13 @@
+var Games = require('../app/controllers/games.js');
+
 module.exports = function(app) {
-    var game = require('../app/controllers/game.js');
-    app.cmd('start', '', game.start);
-    app.cmd('stop', 'o', game.stop);
-    app.cmd('join', '', game.join);
-    app.cmd('quit', '', game.quit);
-    app.cmd('cards', '', game.cards);
-    app.cmd('play', '', game.play);
-    app.cmd('list', '', game.list);
-    app.cmd('winner', '', game.winner);
+    var games = new Games();
+    app.cmd('start', '', games.start);
+    app.cmd('stop', 'o', games.stop);
+    app.cmd('join', '', games.join);
+    app.cmd('quit', '', games.quit);
+    app.cmd('cards', '', games.cards);
+    app.cmd('play', '', games.play);
+    app.cmd('list', '', games.list);
+    app.cmd('winner', '', games.winner);
 };
