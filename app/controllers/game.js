@@ -173,10 +173,10 @@ var Game = function Game(channel, client, config) {
 
     /**
      * Play a black card from players hand
-     * @param player Player object
      * @param cards card indexes in players hand
+     * @param player Player who played the cards
      */
-    self.playCard = function (player, cards) {
+    self.playCard = function (cards, player) {
         console.log(player.nick + ' played cards', cards.join(', '));
         if (self.state !== STATES.PLAYABLE || player.cards.numCards() === 0) {
             self.say(player.nick + ': Can\'t play at the moment.');
@@ -203,12 +203,8 @@ var Game = function Game(channel, client, config) {
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
-                    if (_.where(_.filter(self.players, function (player) {
-                        // check only players with cards (so players who joined in the middle of a round are ignored)
-                        return player.cards.numCards() > 0;
-                    }), {hasPlayed: false, isCzar: false}).length === 0) {
-                        // alright, everyone played
-                        self.state = STATES.PLAYED;
+                    // show entries if all players have played
+                    if (self.checkAllPlayed()) {
                         self.showEntries();
                     }
                 }
@@ -222,23 +218,42 @@ var Game = function Game(channel, client, config) {
      * Show the entries
      */
     self.showEntries = function () {
-        self.say('Everyone has played. Here are the entries:');
-        // shuffle the entries
-        self.table.black = _.shuffle(self.table.black);
-        _.each(self.table.black, function (cards, i) {
-            self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
-        }, this);
-        self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+        self.state = STATES.PLAYED;
+        // TODO: Check if 2 or more entries... "only one entry this round. nick wins by default"
+        if (self.table.black.length === 0) {
+            self.say('No one played on this round.');
+        } else if (self.table.black.length === 1) {
+            self.say('Only one player played and is the winner by default.');
+            self.selectWinner(0);
+        } else {
+            self.say('Everyone has played. Here are the entries:');
+            // shuffle the entries
+            self.table.black = _.shuffle(self.table.black);
+            _.each(self.table.black, function (cards, i) {
+                self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
+            }, this);
+            // check that czar still exists
+            var currentCzar = _.findWhere(this.players, {isCzar: true});
+            if (typeof currentCzar === 'undefined') {
+                // no czar, random winner (TODO: Voting?)
+                self.say('The czar has fled the scene. So I will pick the winner on this round.');
+                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+            } else {
+                self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+            }
+
+        }
     };
 
     /**
      * Pick an entry that wins the round
      * @param index Index of the winning card in table list
+     * @param player Player who said the command (use null for internal calls, to ignore checking)
      */
-    self.selectWinner = function (player, index) {
+    self.selectWinner = function (index, player) {
         var winner = self.table.black[index];
         if (self.state === STATES.PLAYED) {
-            if (player !== self.czar) {
+            if (typeof player !== 'undefined' && player !== self.czar) {
                 client.say(player.nick + ': You are not the card czar. Only the card czar can select the winner');
             } else if (typeof winner === 'undefined') {
                 self.say('Invalid winner');
@@ -268,6 +283,24 @@ var Game = function Game(channel, client, config) {
             args.push(card.text);
         }, this);
         return util.format.apply(this, args);
+    };
+
+    /**
+     * Check if all active players played on the current round
+     * @returns Boolean true if all players have played
+     */
+    self.checkAllPlayed = function () {
+        var allPlayed = false;
+        if (_.where(_.filter(self.players, function (player) {
+            // check only players with cards (so players who joined in the middle of a round are ignored)
+            return player.cards.numCards() > 0;
+        }), {hasPlayed: false, isCzar: false}).length === 0) {
+            allPlayed = true;
+            // alright, everyone played
+//            self.state = STATES.PLAYED;
+//            self.showEntries();
+        }
+        return allPlayed;
     };
 
     /**
@@ -323,6 +356,18 @@ var Game = function Game(channel, client, config) {
         if (typeof player !== 'undefined') {
             self.players = _.without(self.players, player);
             self.say(player.nick + ' has left the game');
+
+            // check if remaining players have all player
+            if (self.state === STATES.PLAYABLE && self.checkAllPlayed()) {
+                self.showEntries();
+            }
+
+            // check czar
+            if(self.state === STATES.PLAYED && self.czar === player) {
+                self.say('The czar has fled the scene. So I will pick the winner on this round.');
+                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+            }
+
             return player;
         }
         return false;

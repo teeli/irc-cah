@@ -100,11 +100,11 @@
     },
     {
         "pick": 2,
-        "text": "(Pick 2) That's right I killed %s. How you ask? %s."
+        "text": "(Pick 2) That's right, I killed %s. How, you ask? %s."
     },
     {
         "pick": 2,
-        "text": "(Pick 2) What's the next superhero/sidekick duo?"
+        "text": "(Pick 2) What's the next superhero/sidekick duo? %s & %s!"
     },
     {
         "pick": 2,
@@ -172,7 +172,7 @@
         "text": "He who controls %s controls the world."
     },
     {
-        "text": "How am I maintaining my relationship status."
+        "text": "How am I maintaining my relationship status?"
     },
     {
         "text": "I do not know with what weapons World War III will be fought, but World War IV will be fought with."

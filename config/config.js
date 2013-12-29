@@ -1,4 +1,13 @@
-var _ = require('underscore');
+var fs = require('fs'),
+    _ = require('underscore');
+
+// check custom card files
+if(!fs.existsSync(__dirname + '/../config/cards/blacks-custom.json')) {
+    fs.writeFile(__dirname + '/../config/cards/blacks-custom.json');
+}
+if(!fs.existsSync(__dirname + '/../config/cards/whites-custom.json')) {
+    fs.writeFile(__dirname + '/../config/cards/whites-custom.json');
+}
 
 // Load app configuration
 
