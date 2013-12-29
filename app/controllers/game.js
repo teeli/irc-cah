@@ -60,7 +60,6 @@ var Game = function Game(channel, client, config) {
     self.stop = function (player) {
         self.state = STATES.STOPPED;
 
-
         if (typeof player !== 'undefined') {
             self.say(player.nick + ' stopped the game.');
         } else {
@@ -274,7 +273,7 @@ var Game = function Game(channel, client, config) {
      * @returns The new player or false if invalid player
      */
     self.addPlayer = function (player) {
-        if (typeof self.getPlayer(player.hostname) === 'undefined') {
+        if (typeof self.getPlayer({hostname: player.hostname}) === 'undefined') {
             self.players.push(player);
             self.say(player.nick + ' has joined the game');
             // check if waiting for players
@@ -283,6 +282,8 @@ var Game = function Game(channel, client, config) {
                 self.nextRound();
             }
             return player;
+        } else {
+            console.log('Player tried to join again', player.nick, player.hostname);
         }
         return false;
     };
@@ -341,7 +342,7 @@ var Game = function Game(channel, client, config) {
     /**
      * List all players in the current game
      */
-    self.listPlayers = function() {
+    self.listPlayers = function () {
         self.say('Players in the current game: ' + _.pluck(self.players, 'nick').join(', '));
     };
 
