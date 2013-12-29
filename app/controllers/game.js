@@ -34,6 +34,7 @@ var Game = function Game(channel, client, config) {
     self.client = client; // reference to the irc client
     self.config = config; // configuration data
     self.state = STATES.STARTED; // game state storage
+    self.points = [];
 
     // init decks
     self.decks = {
@@ -245,6 +246,8 @@ var Game = function Game(channel, client, config) {
                 self.state = STATES.ROUND_END;
                 var owner = winner.cards[0].owner;
                 owner.points++;
+                // update points object
+                _.findWhere(self.points, {player: owner}).points = owner.points;
                 // announce winner
                 self.say('Winner is: ' + owner.nick + ' with "' + self.getFullEntry(self.table.white, winner.getCards()) + '"! ' + owner.nick + ' has ' + owner.points + ' awesome points');
                 self.clean();
@@ -276,6 +279,20 @@ var Game = function Game(channel, client, config) {
         if (typeof self.getPlayer({hostname: player.hostname}) === 'undefined') {
             self.players.push(player);
             self.say(player.nick + ' has joined the game');
+            // check if player is returning to game
+            var pointsPlayer = _.findWhere(self.points, {hostname: player.hostname});
+            if (typeof pointsPlayer === 'undefined') {
+                // new player
+                self.points.push({
+                    hostname: player.hostname, // user for searching
+                    player:   player,
+                    points:   0
+                });
+            } else {
+                // returning player
+                pointsPlayer.player = player;
+                player.points = pointsPlayer.points;
+            }
             // check if waiting for players
             if (self.state === STATES.WAITING && self.players.length >= 3) {
                 // enough players, start the game
@@ -329,12 +346,12 @@ var Game = function Game(channel, client, config) {
      * Show points for all players
      */
     self.showPoints = function () {
-        var sortedPlayers = _.sortBy(self.players, function (player) {
-            return -player.points;
+        var sortedPlayers = _.sortBy(self.points, function (point) {
+            return -point.player.points;
         });
         var output = "";
-        _.each(sortedPlayers, function (player) {
-            output += player.nick + " " + player.points + " awesome points, ";
+        _.each(sortedPlayers, function (point) {
+            output += point.player.nick + " " + point.points + " awesome points, ";
         });
         self.say('The most horrible people: ' + output.slice(0, -2));
     };
