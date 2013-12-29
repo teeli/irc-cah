@@ -222,6 +222,8 @@ var Game = function Game(channel, client, config) {
      */
     self.showEntries = function () {
         self.say('Everyone has played. Here are the entries:');
+        // shuffle the entries
+        self.table.black = _.shuffle(self.table.black);
         _.each(self.table.black, function (cards, i) {
             self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
         }, this);
