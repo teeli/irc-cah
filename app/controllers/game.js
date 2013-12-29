@@ -60,11 +60,13 @@ var Game = function Game(channel, client, config) {
     self.stop = function (player) {
         self.state = STATES.STOPPED;
 
+
         if (typeof player !== 'undefined') {
             self.say(player.nick + ' stopped the game.');
         } else {
-            self.say('Stopping the game.');
+            self.say('Game has been stopped.');
         }
+        self.showPoints();
 
         clearTimeout(self.startTimeout);
         // TODO: Destroy cards & players
@@ -164,7 +166,7 @@ var Game = function Game(channel, client, config) {
     self.playWhite = function () {
         var card = self.decks.white.pickCards();
         // replace all instance of %s with underscores for prettier output
-        self.say(card.text.replace(/\%s/g, '___'));
+        self.say('Card: ' + card.text.replace(/\%s/g, '___'));
         self.table.white = card;
         // TODO: Timer to end the round
     };
