@@ -203,7 +203,7 @@ var Game = function Game(channel, client, config) {
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
                     // show entries if all players have played
-                    if(self.checkAllPlayed()) {
+                    if (self.checkAllPlayed()) {
                         self.showEntries();
                     }
                 }
@@ -219,19 +219,28 @@ var Game = function Game(channel, client, config) {
     self.showEntries = function () {
         self.state = STATES.PLAYED;
         // TODO: Check if 2 or more entries... "only one entry this round. nick wins by default"
-        if(self.table.black.length === 0) {
+        if (self.table.black.length === 0) {
             self.say('No one played on this round.');
-        } else if(self.table.black.length === 1) {
+        } else if (self.table.black.length === 1) {
             self.say('Only one player played and is the winner by default.');
             self.selectWinner(0);
-        }  else {
+        } else {
             self.say('Everyone has played. Here are the entries:');
             // shuffle the entries
             self.table.black = _.shuffle(self.table.black);
             _.each(self.table.black, function (cards, i) {
                 self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
             }, this);
-            self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+            // check that czar still exists
+            var currentCzar = _.findWhere(this.players, {isCzar: true});
+            if (typeof currentCzar === 'undefined') {
+                // no czar, random winner (TODO: Voting?)
+                self.say('The czar has fled the scene. So I will pick the winner on this round.');
+                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+            } else {
+                self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+            }
+
         }
     };
 
@@ -334,6 +343,12 @@ var Game = function Game(channel, client, config) {
             // check if remaining players have all player
             if (self.state === STATES.PLAYABLE && self.checkAllPlayed()) {
                 self.showEntries();
+            }
+
+            // check czar
+            if(self.state === STATES.PLAYED && self.czar === player) {
+                self.say('The czar has fled the scene. So I will pick the winner on this round.');
+                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
             }
 
             return player;
