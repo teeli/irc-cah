@@ -332,7 +332,14 @@ var Game = function Game(channel, client, config) {
         _.each(sortedPlayers, function (player) {
             output += player.nick + " " + player.points + " points, ";
         });
-        self.say(output.slice(0, -2));
+        self.say('Points in the current game: ' + output.slice(0, -2));
+    };
+
+    /**
+     * List all players in the current game
+     */
+    self.listPlayers = function() {
+        self.say('Players in the current game: ' + _.pluck(self.players, 'nick').join(', '));
     };
 
     /**

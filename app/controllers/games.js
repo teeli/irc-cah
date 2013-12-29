@@ -154,7 +154,7 @@ var Games = function Games() {
         if (typeof game === 'undefined') {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
-            client.say(channel, game.players.pluck('nick').join(', '));
+            game.listPlayers();
         }
     };
 
