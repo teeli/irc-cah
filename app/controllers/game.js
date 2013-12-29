@@ -334,7 +334,7 @@ var Game = function Game(channel, client, config) {
         _.each(sortedPlayers, function (player) {
             output += player.nick + " " + player.points + " points, ";
         });
-        self.say('Points in the current game: ' + output.slice(0, -2));
+        self.say('THe most horrible people at the moment: ' + output.slice(0, -2));
     };
 
     /**
