@@ -138,7 +138,7 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             var player = game.getPlayer({hostname: hostname});
-            game.playCard(player, cmdArgs);
+            game.playCard(cmdArgs, player);
         }
     };
 
@@ -172,7 +172,7 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             var player = game.getPlayer({hostname: hostname});
-            game.selectWinner(player, cmdArgs[0]);
+            game.selectWinner(cmdArgs[0], player);
         }
     };
 
