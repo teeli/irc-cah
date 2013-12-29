@@ -247,7 +247,7 @@ var Game = function Game(channel, client, config) {
                 var owner = winner.cards[0].owner;
                 owner.points++;
                 // announce winner
-                self.say('Winner is: ' + owner.nick + ' with "' + self.getFullEntry(self.table.white, winner.getCards()) + '"! ' + owner.nick + ' has ' + owner.points + ' points');
+                self.say('Winner is: ' + owner.nick + ' with "' + self.getFullEntry(self.table.white, winner.getCards()) + '"! ' + owner.nick + ' has ' + owner.points + ' awesome points');
                 self.clean();
                 self.nextRound();
             }
@@ -333,9 +333,9 @@ var Game = function Game(channel, client, config) {
         });
         var output = "";
         _.each(sortedPlayers, function (player) {
-            output += player.nick + " " + player.points + " points, ";
+            output += player.nick + " " + player.points + " awesome points, ";
         });
-        self.say('The most horrible people at the moment: ' + output.slice(0, -2));
+        self.say('The most horrible people: ' + output.slice(0, -2));
     };
 
     /**
