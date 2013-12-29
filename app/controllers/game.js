@@ -54,10 +54,21 @@ var Game = function Game(channel, client, config) {
      */
     self.stop = function (player) {
         self.state = STATES.STOPPED;
-        // TODO: Destroy everything
+
         if (typeof player !== 'undefined') {
             self.say(player.nick + ' stopped the game (or at least would have if stopping was implemented)');
         }
+
+        clearTimeout(self.startTimeout);
+        // TODO: Destroy cards & players
+        delete self.players;
+        delete self.config;
+        delete self.client;
+        delete self.channel;
+        delete self.round;
+        delete self.decks;
+        delete self.discards;
+        delete self.table;
     };
 
     /**
@@ -154,7 +165,7 @@ var Game = function Game(channel, client, config) {
      */
     self.playCard = function (player, cards) {
         console.log(player.nick + ' played cards', cards.join(', '));
-        if (self.state !== STATES.PLAYABLE) {
+        if (self.state !== STATES.PLAYABLE || player.cards.numCards() === 0) {
             self.say(player.nick + ': Can\'t play at the moment.');
         } else if (typeof player !== 'undefined') {
             if (player.isCzar === true) {
@@ -180,7 +191,10 @@ var Game = function Game(channel, client, config) {
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
-                    if (_.where(self.players, {hasPlayed: false, isCzar: false}).length === 0) {
+                    if (_.where(_.filter(self.players, function(player) {
+                        // check only players with cards (so players who joined in the middle of a round are ignored)
+                        return player.cards.numCards() > 0;
+                    }), {hasPlayed: false, isCzar: false}).length === 0) {
                         // alright, everyone played
                         self.state = STATES.PLAYED;
                         self.showEntries();

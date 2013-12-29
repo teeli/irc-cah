@@ -56,11 +56,12 @@ var Games = function Games() {
      */
     self.stop = function (client, message, cmdArgs) {
         var channel = message.args[0],
+            hostname = message.user + '@' + message.host,
             game = self.findGame(channel);
         if (typeof game === 'undefined') {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
-            game.stop();
+            game.stop(game.getPlayer({hostname: hostname}));
             self.games = _.without(self.games, game);
         }
     };
