@@ -186,8 +186,7 @@ var Game = function Game(channel, client, config) {
                 var count = blanks ? blanks.length : 1;
                 if (player.hasPlayed === true) {
                     self.say(player.nick + ': You have already played on this round.');
-                }
-                if (cards.length != count) {
+                } else if (cards.length != count) {
                     // invalid card count
                     self.say(player.nick + ': You must pick ' + count + ' cards.');
                 } else {
