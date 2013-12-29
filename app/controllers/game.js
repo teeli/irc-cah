@@ -352,7 +352,7 @@ var Game = function Game(channel, client, config) {
     self.say('A new game of Cards Against Humanity. The game start in 30 seconds. Type !join to join the game any time.');
 
     // wait for players to join
-    self.startTimeout = setTimeout(self.nextRound, 10000);
+    self.startTimeout = setTimeout(self.nextRound, 30000);
 
 };
 
