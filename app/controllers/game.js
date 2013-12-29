@@ -202,14 +202,19 @@ var Game = function Game(channel, client, config) {
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
-                    if (_.where(_.filter(self.players, function (player) {
-                        // check only players with cards (so players who joined in the middle of a round are ignored)
-                        return player.cards.numCards() > 0;
-                    }), {hasPlayed: false, isCzar: false}).length === 0) {
-                        // alright, everyone played
+                    // show entries if all players have played
+                    if(self.checkAllPlayed()) {
                         self.state = STATES.PLAYED;
                         self.showEntries();
                     }
+//                    if (_.where(_.filter(self.players, function (player) {
+//                        // check only players with cards (so players who joined in the middle of a round are ignored)
+//                        return player.cards.numCards() > 0;
+//                    }), {hasPlayed: false, isCzar: false}).length === 0) {
+//                        // alright, everyone played
+//                        self.state = STATES.PLAYED;
+//                        self.showEntries();
+//                    }
                 }
             }
         } else {
@@ -221,6 +226,7 @@ var Game = function Game(channel, client, config) {
      * Show the entries
      */
     self.showEntries = function () {
+        // TODO: Check if 2 or more entries... "only one entry this round. nick wins by default"
         self.say('Everyone has played. Here are the entries:');
         // shuffle the entries
         self.table.black = _.shuffle(self.table.black);
@@ -268,6 +274,24 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Check if all active players played on the current round
+     * @returns Boolean true if all players have played
+     */
+    self.checkAllPlayed = function () {
+        var allPlayed = false;
+        if (_.where(_.filter(self.players, function (player) {
+            // check only players with cards (so players who joined in the middle of a round are ignored)
+            return player.cards.numCards() > 0;
+        }), {hasPlayed: false, isCzar: false}).length === 0) {
+            allPlayed = true;
+            // alright, everyone played
+//            self.state = STATES.PLAYED;
+//            self.showEntries();
+        }
+        return allPlayed;
+    };
+
+    /**
      * Add a player to the game
      * @param player Player object containing new player's data
      * @returns The new player or false if invalid player
@@ -306,6 +330,13 @@ var Game = function Game(channel, client, config) {
         if (typeof player !== 'undefined') {
             self.players = _.without(self.players, player);
             self.say(player.nick + ' has left the game');
+
+            // check if remaining players have all player
+            if (self.state === STATES.PLAYABLE && self.checkAllPlayed()) {
+                self.state = STATES.PLAYED;
+                self.showEntries();
+            }
+
             return player;
         }
         return false;
