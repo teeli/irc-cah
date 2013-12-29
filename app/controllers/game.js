@@ -60,7 +60,7 @@ var Game = function Game(channel, client, config) {
         self.state = STATES.STOPPED;
 
         if (typeof player !== 'undefined') {
-            self.say(player.nick + ' stopped the game (or at least would have if stopping was implemented)');
+            self.say(player.nick + ' stopped the game.');
         }
 
         clearTimeout(self.startTimeout);
