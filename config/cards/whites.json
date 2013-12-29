@@ -104,7 +104,7 @@
     },
     {
         "pick": 2,
-        "text": "(Pick 2) What's the next superhero/sidekick duo?"
+        "text": "(Pick 2) What's the next superhero/sidekick duo? %s & %s"
     },
     {
         "pick": 2,
