@@ -133,17 +133,6 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
-     * Play new white card on the table
-     */
-    self.playWhite = function () {
-        var card = self.decks.white.pickCards();
-        // replace all instance of %s with underscores for prettier output
-        self.say(card.text.replace(/\%s/g, '___'));
-        self.table.white = card;
-        // TODO: Timer to end the round
-    };
-
-    /**
      * Clean up table after round is complete
      */
     self.clean = function () {
@@ -167,6 +156,17 @@ var Game = function Game(channel, client, config) {
         });
         // reset state
         self.state = STATES.STARTED;
+    };
+
+    /**
+     * Play new white card on the table
+     */
+    self.playWhite = function () {
+        var card = self.decks.white.pickCards();
+        // replace all instance of %s with underscores for prettier output
+        self.say(card.text.replace(/\%s/g, '___'));
+        self.table.white = card;
+        // TODO: Timer to end the round
     };
 
     /**
