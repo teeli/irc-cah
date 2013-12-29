@@ -26,26 +26,30 @@ var Game = function Game(channel, client, config) {
     var self = this;
 
     // properties
-    self.round = 0;
-    self.players = [];
-    self.channel = channel;
-    self.client = client;
-    self.config = config;
-    self.state = STATES.STARTED;
+    self.waitCount = 0; // number of times waited until enough players
+    self.round = 0; // round number
+    self.players = []; // list of players
+    self.channel = channel; // the channel this game is running on
+    self.client = client; // reference to the irc client
+    self.config = config; // configuration data
+    self.state = STATES.STARTED; // game state storage
 
     // init decks
     self.decks = {
         white: new Cards(config.cards.whites),
         black: new Cards(config.cards.blacks)
     };
+    // init discard piles
     self.discards = {
         white: new Cards(),
         black: new Cards()
     };
+    // init table slots
     self.table = {
         white: null,
         black: []
     };
+    // shuffle decks
     self.decks.white.shuffle();
     self.decks.black.shuffle();
 
