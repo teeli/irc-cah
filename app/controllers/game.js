@@ -170,7 +170,13 @@ var Game = function Game(channel, client, config) {
                     self.say(player.nick + ': You must pick ' + count + ' cards.');
                 } else {
                     // get played cards
-                    var playerCards = player.cards.pickCards(cards);
+                    var playerCards;
+                    try {
+                        playerCards = player.cards.pickCards(cards);
+                    } catch(error) {
+                        self.notice(player.nick, 'Invalid card index');
+                        return false;
+                    }
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
