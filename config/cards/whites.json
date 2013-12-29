@@ -1,6 +1,6 @@
 ﻿[
     {
-        "text": "%s kid-tested mother-approved."
+        "text": "%s: kid-tested mother-approved."
     },
     {
         "text": "%s: good to the last drop."
@@ -23,12 +23,12 @@
     {
         "draw": 2,
         "pick": 3,
-        "text": "(Draw 2, Pick 3) %s + %s = %s"
+        "text": "(Pick 3) %s + %s = %s"
     },
     {
         "draw": 2,
         "pick": 3,
-        "text": "(Draw 2, Pick 3) I went from %s to %s, all thanks to %s."
+        "text": "(Pick 3) I went from %s to %s, all thanks to %s."
     },
     {
         "pick": 2,
@@ -290,7 +290,7 @@
         "text": "The healing process began when I joined a support group for victims of %s."
     },
     {
-        "text": "The socialist governments of Scandanavia have declared that access to %s is a basic human right."
+        "text": "The socialist governments of Scandinavia have declared that access to %s is a basic human right."
     },
     {
         "text": "The votes are in, and the new high school mascot is %s."
