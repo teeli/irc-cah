@@ -5,14 +5,15 @@ var _ = require('underscore'),
 
 /**
  * Available states for game
- * @type {{STOPPED: string, STARTED: string, PLAYABLE: string, PLAYED: string, ROUND_END: string}}
+ * @type {{STOPPED: string, STARTED: string, PLAYABLE: string, PLAYED: string, ROUND_END: string, WAITING: string}}
  */
 var STATES = {
     STOPPED:   'Stopped',
     STARTED:   'Started',
     PLAYABLE:  'Playable',
     PLAYED:    'Played',
-    ROUND_END: 'RoundEnd'
+    ROUND_END: 'RoundEnd',
+    WAITING:   'Waiting'
 };
 
 // TODO: Implement the ceremonial haiku round that ends the game
@@ -61,6 +62,8 @@ var Game = function Game(channel, client, config) {
 
         if (typeof player !== 'undefined') {
             self.say(player.nick + ' stopped the game.');
+        } else {
+            self.say('Stopping the game.');
         }
 
         clearTimeout(self.startTimeout);
@@ -79,10 +82,12 @@ var Game = function Game(channel, client, config) {
      * Start next round
      */
     self.nextRound = function () {
-        if (self.players.length === 0) {
-            // TODO: stop the game here
-            self.say('Not enough players. Stoping...');
-            self.stop();
+        clearTimeout(self.stopTimeout);
+        if (self.players.length < 3) {
+            self.say('Not enough players to start a round (need at least 3). Waiting for others to join. Stopping in 3 minutes if not enough players.');
+            self.state = STATES.WAITING;
+            // stop game if not enough pleyers in 3 minutes
+            self.stopTimeout = setTimeout(self.stop, 3 * 60 * 1000);
             return false;
         }
         self.round++;
@@ -190,14 +195,14 @@ var Game = function Game(channel, client, config) {
                     var playerCards;
                     try {
                         playerCards = player.cards.pickCards(cards);
-                    } catch(error) {
+                    } catch (error) {
                         self.notice(player.nick, 'Invalid card index');
                         return false;
                     }
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
-                    if (_.where(_.filter(self.players, function(player) {
+                    if (_.where(_.filter(self.players, function (player) {
                         // check only players with cards (so players who joined in the middle of a round are ignored)
                         return player.cards.numCards() > 0;
                     }), {hasPlayed: false, isCzar: false}).length === 0) {
@@ -218,10 +223,6 @@ var Game = function Game(channel, client, config) {
     self.showEntries = function () {
         self.say('Everyone has played. Here are the entries:');
         _.each(self.table.black, function (cards, i) {
-//            var args = [self.table.white.text];
-//            _.each(cards.getCards(), function (card) {
-//                args.push(card.text);
-//            }, this);
             self.say(i + ": " + self.getFullEntry(self.table.white, cards.getCards()));
         }, this);
         self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
@@ -242,11 +243,6 @@ var Game = function Game(channel, client, config) {
                 self.state = STATES.ROUND_END;
                 var owner = winner.cards[0].owner;
                 owner.points++;
-                // parse args for formatting
-//                var args = [self.table.white.text];
-//                _.each(winner.getCards(), function (card) {
-//                    args.push(card.text);
-//                }, this);
                 // announce winner
                 self.say('Winner is: ' + owner.nick + ' with "' + self.getFullEntry(self.table.white, winner.getCards()) + '"! ' + owner.nick + ' has ' + owner.points + ' points');
                 self.clean();
@@ -261,7 +257,7 @@ var Game = function Game(channel, client, config) {
      * @param blacks
      * @returns {*|Object|ServerResponse}
      */
-    self.getFullEntry = function(white, blacks) {
+    self.getFullEntry = function (white, blacks) {
         var args = [white.text];
         _.each(blacks, function (card) {
             args.push(card.text);
@@ -278,6 +274,11 @@ var Game = function Game(channel, client, config) {
         if (typeof self.getPlayer(player.hostname) === 'undefined') {
             self.players.push(player);
             self.say(player.nick + ' has joined the game');
+            // check if waiting for players
+            if (self.state === STATES.WAITING && self.players.length >= 3) {
+                // enough players, start the game
+                self.nextRound();
+            }
             return player;
         }
         return false;
@@ -351,7 +352,7 @@ var Game = function Game(channel, client, config) {
     };
 
     // announce the game on the channel
-    self.say('A new game of Cards Against Humanity. The game start in 30 seconds. Type !join to join the game any time.');
+    self.say('A new game of Cards Against Humanity. The game starts in 30 seconds. Type !join to join the game any time.');
 
     // wait for players to join
     self.startTimeout = setTimeout(self.nextRound, 30000);
