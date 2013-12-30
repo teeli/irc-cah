@@ -183,12 +183,12 @@ var Game = function Game(channel, client, config) {
         self.table.white = card;
         // draw cards
         if (self.table.white.draw > 0) {
-            _.each(_.findWhere(self.players, {isCzar: false}), function (player) {
+            _.each(_.where(self.players, {isCzar: false}), function (player) {
                 for (var i = 0; i < self.table.white.draw; i++) {
                     self.checkDecks();
-                    var card = self.decks.black.pickCards();
-                    player.cards.addCard(card);
-                    card.owner = player;
+                    var c = self.decks.black.pickCards();
+                    player.cards.addCard(c);
+                    c.owner = player;
                 }
             });
         }
