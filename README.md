@@ -8,9 +8,9 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!join** - Join to the currently running game.
 * **!quit** - Quit from the game.
 * **!cards** - Show the cards you have in your hand.
-* **!play [card number] ([card number])** - Play a card from your hand. Play as many numbers separated by spaces as the current card required.
-* **!winner** - Pick a winner of the round. Only for the current *card czar*.
-* **!point** - Show players' *awesome points* in the current game.
+* **!play <card number\> (<card number\>)** - Play a card from your hand. Play as many numbers separated by spaces as the current card required.
+* **!winner <entry number\>** - Pick a winner of the round. Only for the current *card czar*.
+* **!points** - Show players' *awesome points* in the current game.
 * **!list** - List players in the current game.
 
 ##Install
@@ -28,15 +28,16 @@ Run the bot by running `node app.js`, or if you want to run it with production s
 Main configuration files are located in `config/env`. There are two files by default for two different environments, development and production (e.g. if you want to test the bot on a separate channel). For the `clientOptions` directive, refer to the [Node-IRC documentation](https://node-irc.readthedocs.org/en/latest/API.html#client).
 
 ###Cards
-Card configuration is located in `config/cards` directory. There are 2 files by default, `blacks.json` and `whites.json`, that contain the default cards of the game. You can add your custom cards to the game by creating two new files in the directory, `blacks-custom.json` and `whites-custom.json`, and adding cards in them using the same format as the default card files. Any card you add to these files will also be automatically loaded to the game during startup.
+Card configuration is located in `config/cards` directory. There are 2 files by default, `blacks.json` and `whites.json`, that contain the default cards of the game. You can add your custom cards to the game by creating two new files in the directory, `blacks-custom.json` and `whites-custom.json`, and adding cards in them using the same format as the default card files. Any card you add to these files will also be automatically loaded to the game during start up.
 
-Black cards are what players draw from the deck to their hands, white cards are the "question cards".
+Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now. 
 
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
 * Allow pausing/resuming a game.
-* Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config. 
+* Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players. 
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
+* The haiku round.
 
 ##Contribute
 All contributions are welcome in any form, be it pull requests for new features and bug fixes or issue reports or anything else.
