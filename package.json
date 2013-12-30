@@ -1,10 +1,10 @@
 {
   "name": "irc-cah",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cards Against Humanity IRC bot",
   "main": "app.js",
   "author": "Teemu Lahti <teemu.lahti@gmail.com>",
-  "license": "MIT",
+  "license": "Creative Commons BY-NC-SA 2.0",
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
     "test": "node node_modules/grunt-cli/bin/grunt test"
