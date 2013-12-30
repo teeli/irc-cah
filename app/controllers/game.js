@@ -37,6 +37,8 @@ var Game = function Game(channel, client, config) {
     self.state = STATES.STARTED; // game state storage
     self.points = [];
 
+    console.log('whites', config.cards.whites);
+
     // init decks
     self.decks = {
         white: new Cards(config.cards.whites),
@@ -128,6 +130,7 @@ var Game = function Game(channel, client, config) {
         _.each(self.players, function (player) {
             console.log(player.nick + '(' + player.hostname + ') has ' + player.cards.numCards() + ' cards. Dealing ' + (10 - player.cards.numCards()) + ' cards');
             for (var i = player.cards.numCards(); i < 10; i++) {
+                self.checkDecks();
                 var card = self.decks.black.pickCards();
                 player.cards.addCard(card);
                 card.owner = player;
@@ -165,6 +168,7 @@ var Game = function Game(channel, client, config) {
      * Play new white card on the table
      */
     self.playWhite = function () {
+        self.checkDecks();
         var card = self.decks.white.pickCards();
         // replace all instance of %s with underscores for prettier output
         var text = card.text.replace(/\%s/g, '___');
@@ -181,6 +185,7 @@ var Game = function Game(channel, client, config) {
         if (self.table.white.draw > 0) {
             _.each(_.findWhere(self.players, {isCzar: false}), function (player) {
                 for (var i = 0; i < self.table.white.draw; i++) {
+                    self.checkDecks();
                     var card = self.decks.black.pickCards();
                     player.cards.addCard(card);
                     card.owner = player;
@@ -312,11 +317,28 @@ var Game = function Game(channel, client, config) {
             return player.cards.numCards() > 0;
         }), {hasPlayed: false, isCzar: false}).length === 0) {
             allPlayed = true;
-            // alright, everyone played
-//            self.state = STATES.PLAYED;
-//            self.showEntries();
         }
         return allPlayed;
+    };
+
+    /**
+     * Check if decks are empty & reset with discards
+     */
+    self.checkDecks = function() {
+        // check black deck
+        if(self.decks.black.numCards() === 0) {
+            console.log('black deck is empty. reset from discard.');
+            self.decks.black.reset(self.discards.black.reset());
+            self.decks.black.shuffle();
+            console.log(self.decks.black.numCards());
+        }
+        // check white deck
+        if (self.decks.white.numCards() === 0) {
+            console.log('white deck is empty. reset from discard.');
+            self.decks.white.reset(self.discards.white.reset());
+            self.decks.white.shuffle();
+            console.log(self.decks.white.numCards());
+        }
     };
 
     /**

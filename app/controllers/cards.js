@@ -1,14 +1,5 @@
 var _ = require('underscore'),
     Card = require('../models/card');
-//    Backbone = require('backbone'),
-//    Card = require('../models/card');
-//
-//var Cards = Backbone.Collection.extend({
-//    model:       Card,
-//    shuffleDeck: function () {
-//        this.reset(this.shuffle(), {silent: true});
-//    }
-//});
 
 var Cards = function Cards(cards) {
     var self = this;
@@ -25,6 +16,15 @@ var Cards = function Cards(cards) {
         }
         self.cards.push(card);
     });
+
+    self.reset = function(cards) {
+        if(typeof cards === 'undefined') {
+            cards = [];
+        }
+        var oldCards = self.cards;
+        self.cards = cards;
+        return oldCards;
+    };
 
     self.shuffle = function () {
         self.cards = _.shuffle(self.cards);
