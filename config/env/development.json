@@ -2,9 +2,7 @@
     "server":        "irc.saunalahti.fi",
     "nick":          "cah-dev",
     "clientOptions": {
-        "username": "horrible",
         "debug":    true,
         "channels": ["#pi-cah-dev"]
-
     }
 }
