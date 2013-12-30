@@ -2,9 +2,6 @@
     "server":        "openirc.snt.utwente.nl",
     "nick":          "cah",
     "clientOptions": {
-        "username": "horrible",
-        "debug":    true,
         "channels": ["#cah"]
-
     }
 }
