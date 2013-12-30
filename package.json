@@ -14,15 +14,16 @@
     "grunt": "latest",
     "grunt-cli": "latest",
     "irc": "~0.3.6",
-    "path": "~0.4.9"
+    "path": "~0.4.9",
+    "irc-colors": "~1.0.3"
   },
   "devDependencies": {
-      "grunt-contrib-watch":   "latest",
-      "grunt-contrib-jshint":  "latest",
-      "grunt-nodemon":         "latest",
-      "grunt-concurrent":      "latest",
-      "grunt-mocha-test":      "latest",
-      "load-grunt-tasks":      "~0.1.0",
-      "time-grunt":            "~0.1.1"
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-nodemon": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-mocha-test": "latest",
+    "load-grunt-tasks": "~0.1.0",
+    "time-grunt": "~0.1.1"
   }
 }
