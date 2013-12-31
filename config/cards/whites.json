@@ -203,7 +203,7 @@
     },
     {
 		"pick": 1,
-		"text": "I do not know with what weapons World War III will be fought, but World War IV will be fought with."
+		"text": "I do not know with what weapons World War III will be fought, but World War IV will be fought with %s."
     },
     {
 		"pick": 1,
@@ -263,7 +263,7 @@
     },
     {
 		"pick": 1,
-		"text": "Instead of coal, Santa now gives the bad children %s ."
+		"text": "Instead of coal, Santa now gives the bad children %s."
     },
     {
 		"pick": 1,
@@ -323,7 +323,7 @@
     },
     {
 		"pick": 1,
-		"text": "On the third day of Christmas, my true love game to me: three French hens, two turtle doves, and %s."
+		"text": "On the third day of Christmas, my true love gave to me: three French hens, two turtle doves, and %s."
     },
     {
 		"pick": 1,
@@ -347,7 +347,7 @@
     },
     {
 		"pick": 1,
-		"text": "The Five Stages of Grief: denial, anger, bargaining, %s acceptance."
+		"text": "The Five Stages of Grief: denial, anger, bargaining, %s, acceptance."
     },
     {
 		"pick": 1,
@@ -367,7 +367,7 @@
     },
     {
 		"pick": 1,
-		"text": "This is the way the world ends This is the way the world ends Not with a bang but with %s."
+		"text": "This is the way the world ends. Not with a bang but with %s."
     },
     {
 		"pick": 1,
@@ -467,7 +467,7 @@
     },
     {
 		"pick": 1,
-		"text": "What people like %s."
+		"text": "What people like?"
     },
     {
 		"pick": 1,
