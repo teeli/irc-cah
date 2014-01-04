@@ -1,7 +1,7 @@
 ﻿[
     {
 		"pick": 1,
-		"text": "%s: kid-tested mother-approved."
+		"text": "%s: kid-tested, mother-approved."
     },
     {
 		"pick": 1,
@@ -17,7 +17,7 @@
     },
     {
 		"pick": 1,
-		"text": "%s. High five bro."
+		"text": "%s? High five bro!"
     },
     {
 		"pick": 1,
