@@ -396,9 +396,9 @@ var Game = function Game(channel, client, config) {
     /**
      * Check if decks are empty & reset with discards
      */
-    self.checkDecks = function() {
+    self.checkDecks = function () {
         // check black deck
-        if(self.decks.black.numCards() === 0) {
+        if (self.decks.black.numCards() === 0) {
             console.log('black deck is empty. reset from discard.');
             self.decks.black.reset(self.discards.black.reset());
             self.decks.black.shuffle();
@@ -493,7 +493,7 @@ var Game = function Game(channel, client, config) {
             _.each(player.cards.getCards(), function (card, index) {
                 cards += c.bold(' [' + index + '] ') + card.text;
             }, this);
-            self.notice(player.nick,'Your cards are:' + cards);
+            self.notice(player.nick, 'Your cards are:' + cards);
         }
     };
 
