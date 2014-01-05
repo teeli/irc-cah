@@ -279,6 +279,7 @@ var Game = function Game(channel, client, config) {
         if (self.table.black.length === 0) {
             self.say('No one played on this round.');
             // skip directly to next round
+            self.clean();
             self.nextRound();
         } else if (self.table.black.length === 1) {
             self.say('Only one player played and is the winner by default.');
