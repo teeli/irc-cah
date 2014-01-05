@@ -138,7 +138,9 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             var player = game.getPlayer({hostname: hostname});
-            game.playCard(cmdArgs, player);
+            if (typeof(player) !== 'undefined') {
+                game.playCard(cmdArgs, player);
+            }
         }
     };
 
@@ -182,7 +184,7 @@ var Games = function Games() {
      * @param message
      * @param cmdArgs
      */
-    self.points = function(client, message, cmdArgs) {
+    self.points = function (client, message, cmdArgs) {
         var channel = message.args[0],
             hostname = message.user + '@' + message.host,
             game = self.findGame(channel);
