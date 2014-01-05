@@ -201,6 +201,8 @@ var Game = function Game(channel, client, config) {
      */
     self.playCard = function (cards, player) {
         console.log(player.nick + ' played cards', cards.join(', '));
+        // make sure different cards are played
+        cards = _.uniq(cards);
         if (self.state !== STATES.PLAYABLE || player.cards.numCards() === 0) {
             self.say(player.nick + ': Can\'t play at the moment.');
         } else if (typeof player !== 'undefined') {
@@ -211,7 +213,7 @@ var Game = function Game(channel, client, config) {
                     self.say(player.nick + ': You have already played on this round.');
                 } else if (cards.length != self.table.white.pick) {
                     // invalid card count
-                    self.say(player.nick + ': You must pick ' + self.table.white.pick + ' cards.');
+                    self.say(player.nick + ': You must pick ' + self.table.white.pick + ' different cards.');
                 } else {
                     // get played cards
                     var playerCards;
