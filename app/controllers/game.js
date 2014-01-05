@@ -156,10 +156,19 @@ var Game = function Game(channel, client, config) {
         self.table.black = [];
 
         // reset players
+        var removedNicks = [];
         _.each(self.players, function (player) {
             player.hasPlayed = false;
             player.isCzar = false;
+            // check inactive count & remove after 3
+            if(player.inactiveRounds >= 3) {
+                self.removePlayer(player, {silent: true});
+                removedNicks.push(player.nick);
+            }
         });
+        if(removedNicks.length > 0) {
+            self.say('Removed inactive players: ' + removedNicks.join(', '));
+        }
         // reset state
         self.state = STATES.STARTED;
     };
@@ -227,6 +236,7 @@ var Game = function Game(channel, client, config) {
                     }
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
+                    player.inactiveRounds = 0;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
                     // show entries if all players have played
                     if (self.checkAllPlayed()) {
@@ -252,7 +262,7 @@ var Game = function Game(channel, client, config) {
         if (roundElapsed >= timeLimit) {
             console.log('The round timed out');
             self.say('Time is up!');
-            // TODO:: Check for inactive players remove them after 3 timeouts
+            self.markInactivePlayers();
             // show end of turn
             self.showEntries();
         } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
@@ -321,7 +331,8 @@ var Game = function Game(channel, client, config) {
         if (roundElapsed >= timeLimit) {
             console.log('the czar is inactive, selecting winner');
             self.say('Time is up. I will pick the winner on this round.');
-            // TODO:: Check czar & remove player after 3 timeouts
+            // Check czar & remove player after 3 timeouts
+            self.czar.inactiveRounds++;
             // select winner
             self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
         } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
@@ -385,10 +396,7 @@ var Game = function Game(channel, client, config) {
      */
     self.checkAllPlayed = function () {
         var allPlayed = false;
-        if (_.where(_.filter(self.players, function (player) {
-            // check only players with cards (so players who joined in the middle of a round are ignored)
-            return player.cards.numCards() > 0;
-        }), {hasPlayed: false, isCzar: false}).length === 0) {
+        if (self.getNotPlayed().length === 0) {
             allPlayed = true;
         }
         return allPlayed;
@@ -461,12 +469,16 @@ var Game = function Game(channel, client, config) {
     /**
      * Remove player from game
      * @param player
+     * @param options Extra options
      * @returns The removed player or false if invalid player
      */
-    self.removePlayer = function (player) {
+    self.removePlayer = function (player, options) {
+        options = _.extend({}, options);
         if (typeof player !== 'undefined') {
             self.players = _.without(self.players, player);
-            self.say(player.nick + ' has left the game');
+            if (options.silent !== true) {
+                self.say(player.nick + ' has left the game');
+            }
 
             // check if remaining players have all player
             if (self.state === STATES.PLAYABLE && self.checkAllPlayed()) {
@@ -482,6 +494,27 @@ var Game = function Game(channel, client, config) {
             return player;
         }
         return false;
+    };
+
+    /**
+     * Get all player who have not played
+     * @returns Array list of Players that have not played
+     */
+    self.getNotPlayed = function () {
+        return _.where(_.filter(self.players, function (player) {
+            // check only players with cards (so players who joined in the middle of a round are ignored)
+            return player.cards.numCards() > 0;
+        }), {hasPlayed: false, isCzar: false});
+    };
+
+    /**
+     * Check for inactive players
+     * @param options
+     */
+    self.markInactivePlayers = function(options) {
+        _.each(self.getNotPlayed(), function (player) {
+            player.inactiveRounds++;
+        }, this);
     };
 
     /**
