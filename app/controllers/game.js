@@ -449,6 +449,36 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Handle player quits and parts
+     * @param channel
+     * @param nick
+     * @param reason
+     * @param message
+     */
+    self.playerLeaveHandler = function(channel, nick, reason, message) {
+        console.log('Player ' + nick + ' left');
+        var player = self.getPlayer({nick: nick});
+        if(typeof player !== 'undefined') {
+            self.removePlayer(player);
+        }
+    };
+
+    /**
+     * Handle player nick changes
+     * @param oldnick
+     * @param newnick
+     * @param channels
+     * @param message
+     */
+    self.playerNickChangeHandler = function(oldnick, newnick, channels, message) {
+        console.log('Player changed nick from ' + oldnick + ' to ' + newnick);
+        var player = self.getPlayer({nick: oldnick});
+        if(typeof player !== 'undefined') {
+            player.nick = newnick;
+        }
+    };
+
+    /**
      * Public message to the game channel
      * @param string
      */
@@ -470,6 +500,10 @@ var Game = function Game(channel, client, config) {
     // wait for players to join
     self.startTimeout = setTimeout(self.nextRound, 30000);
 
+    // client listeners
+    client.addListener('part', self.playerLeaveHandler);
+    client.addListener('quit', self.playerLeaveHandler);
+    client.addListener('nick', self.playerNickChangeHandler);
 };
 
 exports = module.exports = Game;
