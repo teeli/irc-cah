@@ -192,6 +192,10 @@ var Game = function Game(channel, client, config) {
                 }
             });
         }
+        // start turn timer, check every 10 secs
+        clearInterval(self.turnTimer);
+        self.roundStarted = new Date();
+        self.turnTimer = setInterval(self.turnTimerCheck, 10 * 1000);
     };
 
     /**
@@ -236,13 +240,46 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Check the time that has elapsed since the beinning of the turn.
+     * End the turn is time limit is up
+     */
+    self.turnTimerCheck = function () {
+        // check the time
+        var now = new Date();
+        var timeLimit = 3 * 60 * 1000;
+        var roundElapsed = (now.getTime() - self.roundStarted.getTime());
+        console.log('Round elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
+        if (roundElapsed >= timeLimit) {
+            console.log('The round timed out');
+            self.say('Time is up!');
+            // TODO:: Check for inactive players remove them after 3 timeouts
+            // show end of turn
+            self.showEntries();
+        } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
+            // 10s ... 0s left
+            self.say('10 seconds left!');
+        } else if (roundElapsed >= timeLimit - (30 * 1000) && roundElapsed < timeLimit - (20 * 1000)) {
+            // 30s ... 20s left
+            self.say('30 seconds left!');
+        } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
+            // 60s ... 50s left
+            self.say('Hurry up, 1 minute left!');
+        }
+    };
+
+    /**
      * Show the entries
      */
     self.showEntries = function () {
+        // clear round timer
+        clearInterval(self.turnTimer);
+
         self.state = STATES.PLAYED;
-        // TODO: Check if 2 or more entries... "only one entry this round. nick wins by default"
+        // Check if 2 or more entries...
         if (self.table.black.length === 0) {
             self.say('No one played on this round.');
+            // skip directly to next round
+            self.nextRound();
         } else if (self.table.black.length === 1) {
             self.say('Only one player played and is the winner by default.');
             self.selectWinner(0);
@@ -261,8 +298,40 @@ var Game = function Game(channel, client, config) {
                 self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
             } else {
                 self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+                // start turn timer, check every 10 secs
+                clearInterval(self.winnerTimer);
+                self.roundStarted = new Date();
+                self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
             }
 
+        }
+    };
+
+    /**
+     * Check the time that has elapsed since the beinning of the winner select.
+     * End the turn is time limit is up
+     */
+    self.winnerTimerCheck = function () {
+        // check the time
+        var now = new Date();
+        var timeLimit = 2 * 60 * 1000;
+        var roundElapsed = (now.getTime() - self.roundStarted.getTime());
+        console.log('Winner selecgtion elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
+        if (roundElapsed >= timeLimit) {
+            console.log('the czar is inactive, selecting winner');
+            self.say('Time is up. I will pick the winner on this round.');
+            // TODO:: Check czar & remove player after 3 timeouts
+            // select winner
+            self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+        } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
+            // 10s ... 0s left
+            self.say(self.czar.nick + ': 10 seconds left!');
+        } else if (roundElapsed >= timeLimit - (30 * 1000) && roundElapsed < timeLimit - (20 * 1000)) {
+            // 30s ... 20s left
+            self.say(self.czar.nick + ': 30 seconds left!');
+        } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
+            // 60s ... 50s left
+            self.say(self.czar.nick + ': Hurry up, 1 minute left!');
         }
     };
 
@@ -272,6 +341,9 @@ var Game = function Game(channel, client, config) {
      * @param player Player who said the command (use null for internal calls, to ignore checking)
      */
     self.selectWinner = function (index, player) {
+        // clear winner timer
+        clearInterval(self.winnerTimer);
+
         var winner = self.table.black[index];
         if (self.state === STATES.PLAYED) {
             if (typeof player !== 'undefined' && player !== self.czar) {
