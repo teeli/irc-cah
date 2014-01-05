@@ -156,10 +156,19 @@ var Game = function Game(channel, client, config) {
         self.table.black = [];
 
         // reset players
+        var removedNicks = [];
         _.each(self.players, function (player) {
             player.hasPlayed = false;
             player.isCzar = false;
+            // check inactive count & remove after 3
+            if(player.inactiveRounds >= 3) {
+                self.removePlayer(player, {silent: true});
+                removedNicks.push(player.nick);
+            }
         });
+        if(removedNicks.length > 0) {
+            self.say('Removed inactive players: ' + removedNicks.join(', '));
+        }
         // reset state
         self.state = STATES.STARTED;
     };
@@ -192,6 +201,10 @@ var Game = function Game(channel, client, config) {
                 }
             });
         }
+        // start turn timer, check every 10 secs
+        clearInterval(self.turnTimer);
+        self.roundStarted = new Date();
+        self.turnTimer = setInterval(self.turnTimerCheck, 10 * 1000);
     };
 
     /**
@@ -225,6 +238,7 @@ var Game = function Game(channel, client, config) {
                     }
                     self.table.black.push(playerCards);
                     player.hasPlayed = true;
+                    player.inactiveRounds = 0;
                     self.notice(player.nick, 'You played: ' + self.getFullEntry(self.table.white, playerCards.getCards()));
                     // show entries if all players have played
                     if (self.checkAllPlayed()) {
@@ -238,13 +252,47 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Check the time that has elapsed since the beinning of the turn.
+     * End the turn is time limit is up
+     */
+    self.turnTimerCheck = function () {
+        // check the time
+        var now = new Date();
+        var timeLimit = 3 * 60 * 1000;
+        var roundElapsed = (now.getTime() - self.roundStarted.getTime());
+        console.log('Round elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
+        if (roundElapsed >= timeLimit) {
+            console.log('The round timed out');
+            self.say('Time is up!');
+            self.markInactivePlayers();
+            // show end of turn
+            self.showEntries();
+        } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
+            // 10s ... 0s left
+            self.say('10 seconds left!');
+        } else if (roundElapsed >= timeLimit - (30 * 1000) && roundElapsed < timeLimit - (20 * 1000)) {
+            // 30s ... 20s left
+            self.say('30 seconds left!');
+        } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
+            // 60s ... 50s left
+            self.say('Hurry up, 1 minute left!');
+        }
+    };
+
+    /**
      * Show the entries
      */
     self.showEntries = function () {
+        // clear round timer
+        clearInterval(self.turnTimer);
+
         self.state = STATES.PLAYED;
-        // TODO: Check if 2 or more entries... "only one entry this round. nick wins by default"
+        // Check if 2 or more entries...
         if (self.table.black.length === 0) {
             self.say('No one played on this round.');
+            // skip directly to next round
+            self.clean();
+            self.nextRound();
         } else if (self.table.black.length === 1) {
             self.say('Only one player played and is the winner by default.');
             self.selectWinner(0);
@@ -263,8 +311,41 @@ var Game = function Game(channel, client, config) {
                 self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
             } else {
                 self.say(self.czar.nick + ': Select the winner (!winner <entry number>)');
+                // start turn timer, check every 10 secs
+                clearInterval(self.winnerTimer);
+                self.roundStarted = new Date();
+                self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
             }
 
+        }
+    };
+
+    /**
+     * Check the time that has elapsed since the beinning of the winner select.
+     * End the turn is time limit is up
+     */
+    self.winnerTimerCheck = function () {
+        // check the time
+        var now = new Date();
+        var timeLimit = 2 * 60 * 1000;
+        var roundElapsed = (now.getTime() - self.roundStarted.getTime());
+        console.log('Winner selecgtion elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
+        if (roundElapsed >= timeLimit) {
+            console.log('the czar is inactive, selecting winner');
+            self.say('Time is up. I will pick the winner on this round.');
+            // Check czar & remove player after 3 timeouts
+            self.czar.inactiveRounds++;
+            // select winner
+            self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+        } else if (roundElapsed >= timeLimit - (10 * 1000) && roundElapsed < timeLimit) {
+            // 10s ... 0s left
+            self.say(self.czar.nick + ': 10 seconds left!');
+        } else if (roundElapsed >= timeLimit - (30 * 1000) && roundElapsed < timeLimit - (20 * 1000)) {
+            // 30s ... 20s left
+            self.say(self.czar.nick + ': 30 seconds left!');
+        } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
+            // 60s ... 50s left
+            self.say(self.czar.nick + ': Hurry up, 1 minute left!');
         }
     };
 
@@ -274,6 +355,9 @@ var Game = function Game(channel, client, config) {
      * @param player Player who said the command (use null for internal calls, to ignore checking)
      */
     self.selectWinner = function (index, player) {
+        // clear winner timer
+        clearInterval(self.winnerTimer);
+
         var winner = self.table.black[index];
         if (self.state === STATES.PLAYED) {
             if (typeof player !== 'undefined' && player !== self.czar) {
@@ -314,10 +398,7 @@ var Game = function Game(channel, client, config) {
      */
     self.checkAllPlayed = function () {
         var allPlayed = false;
-        if (_.where(_.filter(self.players, function (player) {
-            // check only players with cards (so players who joined in the middle of a round are ignored)
-            return player.cards.numCards() > 0;
-        }), {hasPlayed: false, isCzar: false}).length === 0) {
+        if (self.getNotPlayed().length === 0) {
             allPlayed = true;
         }
         return allPlayed;
@@ -326,9 +407,9 @@ var Game = function Game(channel, client, config) {
     /**
      * Check if decks are empty & reset with discards
      */
-    self.checkDecks = function() {
+    self.checkDecks = function () {
         // check black deck
-        if(self.decks.black.numCards() === 0) {
+        if (self.decks.black.numCards() === 0) {
             console.log('black deck is empty. reset from discard.');
             self.decks.black.reset(self.discards.black.reset());
             self.decks.black.shuffle();
@@ -390,12 +471,16 @@ var Game = function Game(channel, client, config) {
     /**
      * Remove player from game
      * @param player
+     * @param options Extra options
      * @returns The removed player or false if invalid player
      */
-    self.removePlayer = function (player) {
+    self.removePlayer = function (player, options) {
+        options = _.extend({}, options);
         if (typeof player !== 'undefined') {
             self.players = _.without(self.players, player);
-            self.say(player.nick + ' has left the game');
+            if (options.silent !== true) {
+                self.say(player.nick + ' has left the game');
+            }
 
             // check if remaining players have all player
             if (self.state === STATES.PLAYABLE && self.checkAllPlayed()) {
@@ -414,6 +499,27 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Get all player who have not played
+     * @returns Array list of Players that have not played
+     */
+    self.getNotPlayed = function () {
+        return _.where(_.filter(self.players, function (player) {
+            // check only players with cards (so players who joined in the middle of a round are ignored)
+            return player.cards.numCards() > 0;
+        }), {hasPlayed: false, isCzar: false});
+    };
+
+    /**
+     * Check for inactive players
+     * @param options
+     */
+    self.markInactivePlayers = function(options) {
+        _.each(self.getNotPlayed(), function (player) {
+            player.inactiveRounds++;
+        }, this);
+    };
+
+    /**
      * Show players cards to player
      * @param player
      */
@@ -423,7 +529,7 @@ var Game = function Game(channel, client, config) {
             _.each(player.cards.getCards(), function (card, index) {
                 cards += c.bold(' [' + index + '] ') + card.text;
             }, this);
-            self.notice(player.nick,'Your cards are:' + cards);
+            self.notice(player.nick, 'Your cards are:' + cards);
         }
     };
 
