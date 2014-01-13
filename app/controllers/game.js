@@ -107,9 +107,10 @@ var Game = function Game(channel, client, config) {
         self.say('Round ' + self.round + '! ' + self.czar.nick + ' is the card czar.');
         self.playWhite();
         // show cards for all players (except czar)
-        var timeout = 0;
-        _.each(_.where(self.players, {isCzar: false}), function (player) {
-            setTimeout(self.showCards, timeout + 1000, player);
+        _.each(self.players, function (player) {
+            if (player.isCzar !== true) {
+                self.showCards(player);
+            }
         });
         self.state = STATES.PLAYABLE;
     };
@@ -435,16 +436,17 @@ var Game = function Game(channel, client, config) {
      * @returns The new player or false if invalid player
      */
     self.addPlayer = function (player) {
-        if (typeof self.getPlayer({hostname: player.hostname}) === 'undefined') {
+        if (typeof self.getPlayer({nick: player.nick, hostname: player.hostname}) === 'undefined') {
             self.players.push(player);
             self.say(player.nick + ' has joined the game');
             // check if player is returning to game
-            var pointsPlayer = _.findWhere(self.points, {hostname: player.hostname});
+            var pointsPlayer = _.findWhere(self.points, {nick: player.nick, hostname: player.hostname});
             if (typeof pointsPlayer === 'undefined') {
                 // new player
                 self.points.push({
-                    hostname: player.hostname, // user for searching
-                    player:   player,
+                    nick:     player.nick, // nick and hostname are used for matching returning players
+                    hostname: player.hostname,
+                    player:   player, // reference to player object saved to points object as well
                     points:   0
                 });
             } else {

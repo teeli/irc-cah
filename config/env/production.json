@@ -2,6 +2,9 @@
     "server":        "openirc.snt.utwente.nl",
     "nick":          "cah",
     "clientOptions": {
-        "channels": ["#cah"]
+        "userName":             "cah",
+        "channels":             ["#cah"],
+        "floodProtection":      true,
+        "floodProtectionDelay": 1000
     }
 }
