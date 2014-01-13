@@ -12,6 +12,7 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!winner #** - Pick a winner of the round, # being the number of the entry in the list. Only for the current *card czar*.
 * **!points** - Show players' *awesome points* in the current game.
 * **!list** - List players in the current game.
+* **!status** - Show current status of the game. Output depends on the state of the game (e.g. when waiting for players to play, you can check who hasn't played yet)
 
 ##Install
 1. Clone the repository.
