@@ -71,8 +71,13 @@ var Game = function Game(channel, client, config) {
         }
         self.showPoints();
 
+        // clear all timers
         clearTimeout(self.startTimeout);
-        // TODO: Destroy cards & players
+        clearTimeout(self.stopTimeout);
+        clearTimeout(self.turnTimer);
+        clearTimeout(self.winnerTimer);
+
+        // Destroy cards & players
         delete self.players;
         delete self.config;
         delete self.client;
