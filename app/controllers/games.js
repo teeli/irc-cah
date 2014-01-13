@@ -194,6 +194,22 @@ var Games = function Games() {
             game.showPoints();
         }
     };
+
+    /**
+     * Show top players in current game
+     * @param client
+     * @param message
+     * @param cmdArgs
+     */
+    self.status = function(client, message, cmdArgs) {
+        var channel = message.args[0],
+            game = self.findGame(channel);
+        if (typeof game === 'undefined') {
+            client.say(channel, 'No game running. Start the game by typing !start.');
+        } else {
+            game.showStatus();
+        }
+    };
 };
 
 exports = module.exports = Games;

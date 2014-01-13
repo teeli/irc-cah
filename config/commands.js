@@ -11,4 +11,5 @@ module.exports = function(app) {
     app.cmd('list', '', games.list);
     app.cmd('winner', '', games.winner);
     app.cmd('points', '', games.points);
+    app.cmd('status', '', games.status);
 };

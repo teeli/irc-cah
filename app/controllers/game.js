@@ -166,12 +166,12 @@ var Game = function Game(channel, client, config) {
             player.hasPlayed = false;
             player.isCzar = false;
             // check inactive count & remove after 3
-            if(player.inactiveRounds >= 3) {
+            if (player.inactiveRounds >= 3) {
                 self.removePlayer(player, {silent: true});
                 removedNicks.push(player.nick);
             }
         });
-        if(removedNicks.length > 0) {
+        if (removedNicks.length > 0) {
             self.say('Removed inactive players: ' + removedNicks.join(', '));
         }
         // reset state
@@ -518,7 +518,7 @@ var Game = function Game(channel, client, config) {
      * Check for inactive players
      * @param options
      */
-    self.markInactivePlayers = function(options) {
+    self.markInactivePlayers = function (options) {
         _.each(self.getNotPlayed(), function (player) {
             player.inactiveRounds++;
         }, this);
@@ -553,6 +553,40 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Show status
+     */
+    self.showStatus = function () {
+        var playersNeeded = Math.max(0, 3 - self.players.length), // amount of player needed to start the game
+            timeLeft = 30 - Math.round((new Date().getTime() - self.startTime.getTime()) / 1000), // time left until first round
+            activePlayers = _.filter(self.players, function (player) {
+                // only players with cards in hand are active
+                return player.cards.numCards() > 0;
+            }),
+            played = _.where(activePlayers, {isCzar: false, hasPlayed: true}), // players who have already played
+            notPlayed = _.where(activePlayers, {isCzar: false, hasPlayed: false}); // players who have not played yet
+        switch (self.state) {
+            case STATES.PLAYABLE:
+                self.say(c.bold('Status: ') + self.czar.nick + ' is the czar. Waiting for players to play: ' + _.pluck(notPlayed, 'nick').join(', '));
+                break;
+            case STATES.PLAYED:
+                self.say(c.bold('Status: ') + 'Waiting for ' + self.czar.nick + ' to select the winner.');
+                break;
+            case STATES.ROUND_END:
+                self.say(c.bold('Status: ') + 'Round has ended and next one is starting.');
+                break;
+            case STATES.STARTED:
+                self.say(c.bold('Status: ') + 'Game starts in ' + timeLeft + ' seconds. Need ' + playersNeeded + ' more players to start.');
+                break;
+            case STATES.STOPPED:
+                self.say(c.bold('Status: ') + 'Game has been stopped.');
+                break;
+            case STATES.WAITING:
+                self.say(c.bold('Status: ') + 'Not enough players to start. Need ' + playersNeeded + ' more players to start.');
+                break;
+        }
+    };
+
+    /**
      * List all players in the current game
      */
     self.listPlayers = function () {
@@ -566,10 +600,10 @@ var Game = function Game(channel, client, config) {
      * @param reason
      * @param message
      */
-    self.playerLeaveHandler = function(channel, nick, reason, message) {
+    self.playerLeaveHandler = function (channel, nick, reason, message) {
         console.log('Player ' + nick + ' left');
         var player = self.getPlayer({nick: nick});
-        if(typeof player !== 'undefined') {
+        if (typeof player !== 'undefined') {
             self.removePlayer(player);
         }
     };
@@ -581,10 +615,10 @@ var Game = function Game(channel, client, config) {
      * @param channels
      * @param message
      */
-    self.playerNickChangeHandler = function(oldnick, newnick, channels, message) {
+    self.playerNickChangeHandler = function (oldnick, newnick, channels, message) {
         console.log('Player changed nick from ' + oldnick + ' to ' + newnick);
         var player = self.getPlayer({nick: oldnick});
-        if(typeof player !== 'undefined') {
+        if (typeof player !== 'undefined') {
             player.nick = newnick;
         }
     };
@@ -609,6 +643,7 @@ var Game = function Game(channel, client, config) {
     self.say('A new game of ' + c.rainbow('Cards Against Humanity') + '. The game starts in 30 seconds. Type !join to join the game any time.');
 
     // wait for players to join
+    self.startTime = new Date();
     self.startTimeout = setTimeout(self.nextRound, 30000);
 
     // client listeners
