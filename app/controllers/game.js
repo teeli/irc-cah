@@ -107,9 +107,10 @@ var Game = function Game(channel, client, config) {
         self.say('Round ' + self.round + '! ' + self.czar.nick + ' is the card czar.');
         self.playWhite();
         // show cards for all players (except czar)
-        var timeout = 0;
-        _.each(_.where(self.players, {isCzar: false}), function (player) {
-            setTimeout(self.showCards, timeout + 1000, player);
+        _.each(self.players, function (player) {
+            if (player.isCzar !== true) {
+                self.showCards(player);
+            }
         });
         self.state = STATES.PLAYABLE;
     };

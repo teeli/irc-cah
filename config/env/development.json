@@ -2,7 +2,10 @@
     "server":        "irc.saunalahti.fi",
     "nick":          "cah-dev",
     "clientOptions": {
-        "debug":    true,
-        "channels": ["#pi-cah-dev"]
+        "userName":             "cah",
+        "debug":                true,
+        "channels":             ["#pi-cah-dev"],
+        "floodProtection":      true,
+        "floodProtectionDelay": 2000
     }
 }
