@@ -484,7 +484,16 @@ var Game = function Game(channel, client, config) {
     self.removePlayer = function (player, options) {
         options = _.extend({}, options);
         if (typeof player !== 'undefined') {
+            console.log('removing' + player.nick + ' from the game');
+            // get cards in hand
+            var cards = player.cards.reset();
+            // remove player
             self.players = _.without(self.players, player);
+            // put player's cards to discard
+            _.each(cards, function (card) {
+                console.log('Add card ', card.text, 'to discard');
+                self.discards.black.addCard(card);
+            });
             if (options.silent !== true) {
                 self.say(player.nick + ' has left the game');
             }
