@@ -69,7 +69,10 @@ var Game = function Game(channel, client, config) {
         } else {
             self.say('Game has been stopped.');
         }
-        self.showPoints();
+        if(self.round > 1) {
+            // show points if played more than one round
+            self.showPoints();
+        }
 
         // clear all timers
         clearTimeout(self.startTimeout);
