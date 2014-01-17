@@ -439,15 +439,15 @@ var Game = function Game(channel, client, config) {
      * @returns The new player or false if invalid player
      */
     self.addPlayer = function (player) {
-        if (typeof self.getPlayer({nick: player.nick, hostname: player.hostname}) === 'undefined') {
+        if (typeof self.getPlayer({user: player.user, hostname: player.hostname}) === 'undefined') {
             self.players.push(player);
             self.say(player.nick + ' has joined the game');
             // check if player is returning to game
-            var pointsPlayer = _.findWhere(self.points, {nick: player.nick, hostname: player.hostname});
+            var pointsPlayer = _.findWhere(self.points, {user: player.user, hostname: player.hostname});
             if (typeof pointsPlayer === 'undefined') {
                 // new player
                 self.points.push({
-                    nick:     player.nick, // nick and hostname are used for matching returning players
+                    user:     player.user, // user and hostname are used for matching returning players
                     hostname: player.hostname,
                     player:   player, // reference to player object saved to points object as well
                     points:   0
@@ -464,7 +464,7 @@ var Game = function Game(channel, client, config) {
             }
             return player;
         } else {
-            console.log('Player tried to join again', player.nick, player.hostname);
+            console.log('Player tried to join again', player.nick, player.user, player.hostname);
         }
         return false;
     };
