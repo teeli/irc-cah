@@ -3,10 +3,10 @@ var fs = require('fs'),
 
 // check custom card files
 if(!fs.existsSync(__dirname + '/../config/cards/blacks-custom.json')) {
-    fs.writeFileSync(__dirname + '/../config/cards/blacks-custom.json','{}');
+    fs.writeFileSync(__dirname + '/../config/cards/blacks-custom.json','[]');
 }
 if(!fs.existsSync(__dirname + '/../config/cards/whites-custom.json')) {
-    fs.writeFileSync(__dirname + '/../config/cards/whites-custom.json', '{}');
+    fs.writeFileSync(__dirname + '/../config/cards/whites-custom.json', '[]');
 }
 
 // Load app configuration
