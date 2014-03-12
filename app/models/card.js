@@ -5,7 +5,7 @@ var Card = function Card(card) {
     self.id = _.uniqueId();
     self.draw = card.draw || 0;
     self.pick = card.pick || 0;
-    self.text = card.text || 'A bug in the mainframe (please file a bug report, if you actually get this card)';
+    self.value = card.value || 'A bug in the mainframe (please file a bug report, if you actually get this card)';
 };
 
 /**

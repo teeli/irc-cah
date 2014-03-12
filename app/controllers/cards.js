@@ -64,10 +64,10 @@ var Cards = function Cards(cards) {
 //            }, this);
             console.log('picked cards:');
             console.log(_.pluck(pickedCards.cards, 'id'));
-            console.log(_.pluck(pickedCards.cards, 'text'));
+            console.log(_.pluck(pickedCards.cards, 'value'));
             console.log('remaining cards:');
             console.log(_.pluck(self.cards, 'id'));
-            console.log(_.pluck(self.cards, 'text'));
+            console.log(_.pluck(self.cards, 'value'));
             return pickedCards;
         } else {
             var card = self.cards[index];
