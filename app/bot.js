@@ -28,9 +28,9 @@ exports.init = function() {
         console.log('Joined ' + channel + ' as ' + nick);
     });
 
-    // handle errors
+    // output errors
     client.addListener('error', function (message) {
-        console.log('error: ', message);
+        console.warn('IRC client error: ', message);
     });
 
     client.addListener('message', function (from, to, text, message) {
