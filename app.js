@@ -13,4 +13,5 @@ var bot = require('./app/bot');
 
 // init the bot
 bot.init();
+// load channel command definitions
 require('./config/commands.js')(bot);
