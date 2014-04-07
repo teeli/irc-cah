@@ -335,7 +335,7 @@ var Game = function Game(channel, client, config) {
         var now = new Date();
         var timeLimit = 2 * 60 * 1000;
         var roundElapsed = (now.getTime() - self.roundStarted.getTime());
-        console.log('Winner selecgtion elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
+        console.log('Winner selection elapsed:', roundElapsed, now.getTime(), self.roundStarted.getTime());
         if (roundElapsed >= timeLimit) {
             console.log('the czar is inactive, selecting winner');
             self.say('Time is up. I will pick the winner on this round.');
