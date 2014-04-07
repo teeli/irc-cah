@@ -345,7 +345,7 @@
   },
   {
     "type": "Question",
-    "value": "Chili�s special tonight: %s with a side of %s.",
+    "value": "Chili's special tonight: %s with a side of %s.",
     "keep": "Yes",
     "draw": 1,
     "pick": 2,
@@ -529,7 +529,7 @@
   },
   {
     "type": "Question",
-    "value": "I feel the need�the need for %s.",
+    "value": "I feel the need - the need for %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -697,7 +697,7 @@
   },
   {
     "type": "Question",
-    "value": "If there�s one thing you could change about me it would be %s.",
+    "value": "If there's one thing you could change about me it would be %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1073,7 +1073,7 @@
   },
   {
     "type": "Question",
-    "value": "Sizzler�s special tonight: %s with a side of %s.",
+    "value": "Sizzler's special tonight: %s with a side of %s.",
     "keep": "Yes",
     "draw": 1,
     "pick": 2,
@@ -1113,7 +1113,7 @@
   },
   {
     "type": "Question",
-    "value": "The best Christmas present my grandma ever gave me was%s.",
+    "value": "The best Christmas present my grandma ever gave me was %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1729,7 +1729,7 @@
   },
   {
     "type": "Question",
-    "value": "You�re in good hands with %s.",
+    "value": "You're in good hands with %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,

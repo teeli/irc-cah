@@ -49,7 +49,7 @@
   },
   {
     "type": "Question",
-    "value": "In Vancouver it is now legal to %s.",
+    "value": "In Vancouver, %s is now legal.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,

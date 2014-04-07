@@ -9,7 +9,7 @@
   },
   {
     "type": "Question",
-    "value": "%s. Betcha can't have just one!",
+    "value": "%s: Betcha can't have just one!",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -465,7 +465,7 @@
   },
   {
     "type": "Question",
-    "value": "Sorry everyone, I just %s.",
+    "value": "Sorry everyone, I'm just %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
