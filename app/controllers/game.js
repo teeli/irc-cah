@@ -37,7 +37,8 @@ var Game = function Game(channel, client, config) {
     self.state = STATES.STARTED; // game state storage
     self.points = [];
 
-    console.log('questions', config.cards.questions);
+    console.log('Loaded', config.cards.questions.length, 'questions');
+    console.log('Loaded', config.cards.answers.length, 'answers');
 
     // init decks
     self.decks = {
@@ -419,14 +420,12 @@ var Game = function Game(channel, client, config) {
             console.log('answer deck is empty. reset from discard.');
             self.decks.answer.reset(self.discards.answer.reset());
             self.decks.answer.shuffle();
-            console.log(self.decks.answer.numCards());
         }
         // check question deck
         if (self.decks.question.numCards() === 0) {
             console.log('question deck is empty. reset from discard.');
             self.decks.question.reset(self.discards.question.reset());
             self.decks.question.shuffle();
-            console.log(self.decks.question.numCards());
         }
     };
 
