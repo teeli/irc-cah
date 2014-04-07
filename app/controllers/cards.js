@@ -11,12 +11,19 @@ var Cards = function Cards(cards) {
         var card;
         if(c instanceof Card) {
             card = c;
-        } else {
+        } else if(c.hasOwnProperty('value')) {
             card = new Card(c);
+        } else {
+            console.warning('Invalid card', c);
         }
         self.cards.push(card);
     });
 
+    /**
+     * Reset the collection
+     * @param cards Optional replacement list of cards
+     * @returns {Array} Array of the old, replaced cards
+     */
     self.reset = function(cards) {
         if(typeof cards === 'undefined') {
             cards = [];
@@ -26,16 +33,30 @@ var Cards = function Cards(cards) {
         return oldCards;
     };
 
+    /**
+     * Shuffle the cards
+     * @returns {Cards} The shuffled collection
+     */
     self.shuffle = function () {
         self.cards = _.shuffle(self.cards);
         return self;
     };
 
+    /**
+     * Add card to collection
+     * @param card
+     * @returns {*}
+     */
     self.addCard = function (card) {
         self.cards.push(card);
         return card;
     };
 
+    /**
+     * Remove a card from the collection
+     * @param card
+     * @returns {*}
+     */
     self.removeCard = function (card) {
         if (typeof card !== 'undefined') {
             self.cards = _.without(self.cards, card);
@@ -43,6 +64,11 @@ var Cards = function Cards(cards) {
         return card;
     };
 
+    /**
+     * Pick cards from the collection
+     * @param index (int|Array) Index of a single card, of Array of multiple indexes to remove and return
+     * @returns {Card|Cards} Instance of a single card, or instance of Cards if multiple indexes picked
+     */
     self.pickCards = function (index) {
         if (typeof index === 'undefined') index = 0;
         if (index instanceof Array) {
@@ -76,10 +102,18 @@ var Cards = function Cards(cards) {
         }
     };
 
+    /**
+     * Get all cards in collection
+     * @returns {Array}
+     */
     self.getCards = function() {
         return self.cards;
     };
 
+    /**
+     * Get amount of cards in collection
+     * @returns {Number}
+     */
     self.numCards = function () {
         return this.cards.length;
     };
