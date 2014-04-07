@@ -3,72 +3,72 @@
     "type": "Question",
     "value": "After unifying the GST and PST the Government can now afford to provide %s for %s.",
     "keep": "Yes",
-    "draw": "1",
-    "pick": "2",
+    "draw": 1,
+    "pick": 2,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "Air Canada guidelines now prohibit %s on airplanes.",
     "keep": "Yes",
-    "draw": "0",
-    "pick": "1",
+    "draw": 0,
+    "pick": 1,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "CTV presents %s, the story of %s.",
     "keep": "Yes",
-    "draw": "1",
-    "pick": "2",
+    "draw": 1,
+    "pick": 2,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "If %s came in two-fours Canada would be more %s?",
     "keep": "Yes",
-    "draw": "1",
-    "pick": "2",
+    "draw": 1,
+    "pick": 2,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "In an attempt to reach a wider audience, the Royal Ontario Museum has opened an interactive exhibit on %s.",
     "keep": "Yes",
-    "draw": "0",
-    "pick": "1",
+    "draw": 0,
+    "pick": 1,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "In the next Bob and Doug McKenzie adventure, they have to find %s to uncover a sinister plot involving %s and %s.",
     "keep": "Yes",
-    "draw": "2",
-    "pick": "3",
+    "draw": 2,
+    "pick": 3,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "In Vancouver it is now legal to %s.",
     "keep": "Yes",
-    "draw": "0",
-    "pick": "1",
+    "draw": 0,
+    "pick": 1,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "O Canada, we stand on guard for %s.",
     "keep": "Yes",
-    "draw": "0",
-    "pick": "1",
+    "draw": 0,
+    "pick": 1,
     "source": "CaH Official Canadian Expansion"
   },
   {
     "type": "Question",
     "value": "What's the Canadian government using to inspire rural students to succeed?",
     "keep": "Yes",
-    "draw": "0",
-    "pick": "1",
+    "draw": 0,
+    "pick": 1,
     "source": "CaH Official Canadian Expansion"
   }
 ]

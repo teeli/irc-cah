@@ -15,7 +15,8 @@
     "grunt-cli": "latest",
     "irc": "~0.3.6",
     "path": "~0.4.9",
-    "irc-colors": "~1.0.3"
+    "irc-colors": "~1.0.3",
+    "jayschema": "~0.2.6"
   },
   "devDependencies": {
     "grunt-contrib-watch": "latest",

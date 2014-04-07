@@ -37,13 +37,20 @@ var Game = function Game(channel, client, config) {
     self.state = STATES.STARTED; // game state storage
     self.points = [];
 
-    console.log('Loaded', config.cards.questions.length, 'questions');
-    console.log('Loaded', config.cards.answers.length, 'answers');
+    console.log('Loaded', config.cards.length, 'cards:');
+    var questions = _.filter(config.cards, function(card) {
+        return card.type.toLowerCase() === 'question';
+    });
+    console.log(questions.length, 'questions');
+    var answers = _.filter(config.cards, function(card) {
+        return card.type.toLowerCase() === 'answer';
+    });
+    console.log(answers.length, 'answers');
 
     // init decks
     self.decks = {
-        question: new Cards(config.cards.questions),
-        answer: new Cards(config.cards.answers)
+        question: new Cards(questions),
+        answer: new Cards(answers)
     };
     // init discard piles
     self.discards = {
