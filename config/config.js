@@ -7,7 +7,7 @@ var fs = require('fs'),
  * @param identifier Identifier of the card file
  * @param filename Filename of the card file
  */
-var loadCardFile = function (identifier, filename) {
+function loadCardFile(identifier, filename) {
     console.log('Loading ' + identifier + ': ' + filename);
     if (fs.existsSync(filename)) {
         var data = require(filename);
@@ -23,7 +23,7 @@ var loadCardFile = function (identifier, filename) {
     } else {
         console.error('File does not exists');
     }
-};
+}
 
 // Initialize base configuration and ENV
 var config = _.extend(
@@ -40,19 +40,15 @@ if (!fs.existsSync(__dirname + '/../config/cards/Custom_q.json')) {
     fs.writeFileSync(__dirname + '/../config/cards/Custom_q.json', '[]');
 }
 
-// Question card files
-var questions = {
+// All card file paths. You can comment out the ones you don't want to use.
+var cardFiles = {
     OfficialBaseSetQuestions: __dirname + '/../config/cards/OfficialBaseSet_q.json',
     Official2ndExpansionQuestions: __dirname + '/../config/cards/Official2ndExpansion_q.json',
     Official3rdExpansionQuestions: __dirname + '/../config/cards/Official3rdExpansion_q.json',
     OfficialCanadianExpansionQuestions: __dirname + '/../config/cards/OfficialCanadianExpansion_q.json',
     OfficialChristmasExpansionQuestions: __dirname + '/../config/cards/OfficialChristmasExpansion_q.json',
     BGGQuestions: __dirname + '/../config/cards/BGG_q.json',
-    CustomQuestions: __dirname + '/../config/cards/Custom_q.json'
-};
-
-// Answer card files
-var answers = {
+    CustomQuestions: __dirname + '/../config/cards/Custom_q.json',
     OfficialBaseSetAnswers: __dirname + '/../config/cards/OfficialBaseSet_a.json',
     Official2ndExpansionAnswers: __dirname + '/../config/cards/Official2ndExpansion_a.json',
     Official3rdExpansionAnswers: __dirname + '/../config/cards/Official3rdExpansion_a.json',
@@ -103,17 +99,10 @@ var schema = {
 
 
 // Validate and load cards files
-console.log('Load questions...');
-var cardData, i;
-for (i in questions) {
-    if (questions.hasOwnProperty(i)) {
-        loadCardFile(i, questions[i]);
-    }
-}
-console.log('Load qnswers...');
-for (i in answers) {
-    if (answers.hasOwnProperty(i)) {
-        loadCardFile(i, answers[i]);
+console.log('Loading card data...');
+for (var i in cardFiles) {
+    if (cardFiles.hasOwnProperty(i)) {
+        loadCardFile(i, cardFiles[i]);
     }
 }
 
