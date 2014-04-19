@@ -73,14 +73,6 @@
   },
   {
     "type": "Answer",
-    "value": "A Bop It",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "A brain tumor",
     "keep": "Yes",
     "draw": 0,
@@ -473,14 +465,6 @@
   },
   {
     "type": "Answer",
-    "value": "Aaron Burr",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Active listening",
     "keep": "Yes",
     "draw": 0,
@@ -817,14 +801,6 @@
   },
   {
     "type": "Answer",
-    "value": "Bill Nye the Science Guy",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Bingeing and purging",
     "keep": "Yes",
     "draw": 0,
@@ -985,14 +961,6 @@
   },
   {
     "type": "Answer",
-    "value": "Chutzpah",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Civilian casualties",
     "keep": "Yes",
     "draw": 0,
@@ -1066,14 +1034,6 @@
   {
     "type": "Answer",
     "value": "Coughing into a vagina",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Count Chocula",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1210,22 +1170,6 @@
   {
     "type": "Answer",
     "value": "Doing the right thing",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Domino's Oreo Dessert Pizza",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Dorito breath",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1457,14 +1401,6 @@
   },
   {
     "type": "Answer",
-    "value": "Feeding Rosie O'Donnell",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Fiery poops",
     "keep": "Yes",
     "draw": 0,
@@ -1513,14 +1449,6 @@
   },
   {
     "type": "Answer",
-    "value": "Five-Dollar Footlongs",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Flash flooding",
     "keep": "Yes",
     "draw": 0,
@@ -1554,14 +1482,6 @@
   {
     "type": "Answer",
     "value": "Foreskin",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Forgetting the Alamo",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1769,30 +1689,6 @@
   },
   {
     "type": "Answer",
-    "value": "Glenn Beck being harried by a swarm of buzzards",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Glenn Beck catching his scrotum on a curtain hook",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Glenn Beck convulsively vomiting as a brood of crab spiders hatches in his brain and erupts from his tear ducts",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Global warming",
     "keep": "Yes",
     "draw": 0,
@@ -1826,14 +1722,6 @@
   {
     "type": "Answer",
     "value": "God",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "GoGurt",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -2129,14 +2017,6 @@
   },
   {
     "type": "Answer",
-    "value": "Judge Judy",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Just the tip",
     "keep": "Yes",
     "draw": 0,
@@ -2313,14 +2193,6 @@
   },
   {
     "type": "Answer",
-    "value": "Lunchables",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Mad hacky-sack skills",
     "keep": "Yes",
     "draw": 0,
@@ -2354,14 +2226,6 @@
   {
     "type": "Answer",
     "value": "Masturbation",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Mathletes",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -2450,14 +2314,6 @@
   {
     "type": "Answer",
     "value": "Mouth herpes",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Mr. Clean, right behind you",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -2698,14 +2554,6 @@
   {
     "type": "Answer",
     "value": "Ominous background music",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "One thousand Slim Jims",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -3513,14 +3361,6 @@
   },
   {
     "type": "Answer",
-    "value": "Switching to Geico",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "Swooping",
     "keep": "Yes",
     "draw": 0,
@@ -3705,14 +3545,6 @@
   },
   {
     "type": "Answer",
-    "value": "The Fanta girls",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "The folly of man",
     "keep": "Yes",
     "draw": 0,
@@ -3762,14 +3594,6 @@
   {
     "type": "Answer",
     "value": "The Gulags",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "The Hamburglar",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -3865,30 +3689,6 @@
   },
   {
     "type": "Answer",
-    "value": "The Kool-Aid Man",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "The Little Engine That Could",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "The Make-A-Wish Foundation",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "The milk man",
     "keep": "Yes",
     "draw": 0,
@@ -3945,14 +3745,6 @@
   },
   {
     "type": "Answer",
-    "value": "The shambling corpse of Larry King",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
     "value": "The South",
     "keep": "Yes",
     "draw": 0,
@@ -3962,14 +3754,6 @@
   {
     "type": "Answer",
     "value": "The taint; the grundle; the fleshy fun-bridge",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "The Tempur-Pedic Swedish Sleep System",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -4066,14 +3850,6 @@
   {
     "type": "Answer",
     "value": "Tom Cruise",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "CaH Official Base Set"
-  },
-  {
-    "type": "Answer",
-    "value": "Toni Morrison's vagina",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,

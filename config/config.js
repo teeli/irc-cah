@@ -50,6 +50,7 @@ var cardFiles = {
     BGGQuestions: __dirname + '/../config/cards/BGG_q.json',
     CustomQuestions: __dirname + '/../config/cards/Custom_q.json',
     OfficialBaseSetAnswers: __dirname + '/../config/cards/OfficialBaseSet_a.json',
+    OfficialBaseSetAmericaAnswers: __dirname + '/../config/cards/OfficialBaseSetAmerica_a.json',
     Official2ndExpansionAnswers: __dirname + '/../config/cards/Official2ndExpansion_a.json',
     Official3rdExpansionAnswers: __dirname + '/../config/cards/Official3rdExpansion_a.json',
     OfficialCanadianExpansionAnswers: __dirname + '/../config/cards/OfficialCanadianExpansion_a.json',
