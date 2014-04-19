@@ -113,7 +113,7 @@ var Game = function Game(channel, client, config) {
         self.setCzar();
         self.deal();
         self.say('Round ' + self.round + '! ' + self.czar.nick + ' is the card czar.');
-        self.playquestion();
+        self.playQuestion();
         // show cards for all players (except czar)
         _.each(self.players, function (player) {
             if (player.isCzar !== true) {
@@ -190,7 +190,7 @@ var Game = function Game(channel, client, config) {
     /**
      * Play new question card on the table
      */
-    self.playquestion = function () {
+    self.playQuestion = function () {
         self.checkDecks();
         var card = self.decks.question.pickCards();
         // replace all instance of %s with underscores for prettier output
