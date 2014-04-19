@@ -25,7 +25,7 @@
   },
   {
     "type": "Question",
-    "value": "%s good to the last drop.",
+    "value": "%s: good to the last drop.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -273,14 +273,6 @@
   },
   {
     "type": "Question",
-    "value": "After Billy Mays died, he sold God %s.",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
     "value": "All the cool kids are doing it.",
     "keep": "Yes",
     "draw": 0,
@@ -341,14 +333,6 @@
     "keep": "Yes",
     "draw": 2,
     "pick": 3,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
-    "value": "Chili's special tonight: %s with a side of %s.",
-    "keep": "Yes",
-    "draw": 1,
-    "pick": 2,
     "source": "BGG Suggestions"
   },
   {
@@ -753,14 +737,6 @@
   },
   {
     "type": "Question",
-    "value": "Instead of endorsing Jell-O Pudding Pops, Bill Cosby now endorses %s.",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
     "value": "Instead of her normal self, Cinderella should have turned into %s at midnight.",
     "keep": "Yes",
     "draw": 0,
@@ -874,14 +850,6 @@
   {
     "type": "Question",
     "value": "Moral at work was boosted when they put%s in the vending machines.",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
-    "value": "Mr. Owl, how many licks does it take to get to the center of %s?",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1073,14 +1041,6 @@
   },
   {
     "type": "Question",
-    "value": "Sizzler's special tonight: %s with a side of %s.",
-    "keep": "Yes",
-    "draw": 1,
-    "pick": 2,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
     "value": "Something you should regret, but secretly don't.",
     "keep": "Yes",
     "draw": 0,
@@ -1241,14 +1201,6 @@
   },
   {
     "type": "Question",
-    "value": "You're listening to KB969, %s radio!",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
     "value": "The theme for our senior prom will be %s.",
     "keep": "Yes",
     "draw": 0,
@@ -1329,7 +1281,7 @@
   },
   {
     "type": "Question",
-    "value": "Warning: This product contains trace amounts of %s.",
+    "value": "Warning: This product may contain trace amounts of %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1401,7 +1353,7 @@
   },
   {
     "type": "Question",
-    "value": "What gave me aids?",
+    "value": "What gave me AIDS?",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -1458,14 +1410,6 @@
   {
     "type": "Question",
     "value": "What keeps me up at night?",
-    "keep": "Yes",
-    "draw": 0,
-    "pick": 1,
-    "source": "BGG Suggestions"
-  },
-  {
-    "type": "Question",
-    "value": "What makes Fred Phelps hard?",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,

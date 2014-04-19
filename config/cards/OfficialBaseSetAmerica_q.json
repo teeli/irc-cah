@@ -1,0 +1,66 @@
+[
+  {
+    "type": "Question",
+    "value": "BILLY MAYS HERE FOR %s!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "Due to a PR fiasco, Walmart no longer offers %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "In the new Disney Channel Original Movie, Hannah Montana struggles with %s for the first time.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "Lifetime presents %s, the story of %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "Major League Baseball has banned %s for giving players an unfair advantage.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "Next on ESPN2: The World Series of %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "TSA guidelines now prohibit %s on airplanes.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  },
+  {
+    "type": "Question",
+    "value": "What's Teach for America using to inspire inner city students to succeed?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Base Set"
+  }
+]

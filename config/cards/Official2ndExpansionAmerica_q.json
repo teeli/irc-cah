@@ -1,0 +1,18 @@
+[
+  {
+    "type": "Question",
+    "value": "Charades was ruined for me forever when my mom had to act out %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Tonight on 20/20: What you don't know about %s could kill you.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  }
+]

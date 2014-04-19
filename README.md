@@ -16,7 +16,7 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 
 ##Install
 1. Clone the repository.
-2. Edit configuration files with your channel & server settings. 
+2. Edit configuration files with your channel & server settings.
 3. Install dependencies using `npm install`.
 
 ###Requirements
@@ -34,9 +34,9 @@ Card configuration is located in `config/cards` directory. Some files are includ
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
 * Allow pausing/resuming a game.
-* Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players. 
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
 * The haiku round.
+* Allow players to change one card per round (make it an option in config?)
 
 ##Contribute
 All contributions are welcome in any form, be it pull requests for new features and bug fixes or issue reports or anything else.
