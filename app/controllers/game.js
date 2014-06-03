@@ -282,6 +282,7 @@ var Game = function Game(channel, client, config) {
         } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
             // 60s ... 50s left
             self.say('Hurry up, 1 minute left!');
+            self.showStatus();
         }
     };
 
