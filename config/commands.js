@@ -12,4 +12,6 @@ module.exports = function(app) {
     app.cmd('winner', '', games.winner);
     app.cmd('points', '', games.points);
     app.cmd('status', '', games.status);
+    app.cmd('pause', '', games.pause);
+    app.cmd('resume', '', games.resume);
 };

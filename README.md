@@ -5,6 +5,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 ##Commands
 * **!start** - Start a new game.
 * **!stop** - Stop the currently running game.
+* **!pause** - Pause the currently running game.
+* **!resume** - Resume a paused game.
 * **!join** - Join to the currently running game.
 * **!quit** - Quit from the game.
 * **!cards** - Show the cards you have in your hand.
@@ -37,7 +39,6 @@ Black cards are what players draw from the deck to their hands, white cards are 
 
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
-* Allow pausing/resuming a game.
 * Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players. 
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
 * The haiku round.
