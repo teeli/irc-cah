@@ -1,7 +1,7 @@
 {
     "server":        "irc.saunalahti.fi",
     "nick":          "cah-dev",
-    "notifyUsers":   true,
+    "notifyUsers":   false,
     "clientOptions": {
         "userName":             "cah",
         "debug":                true,

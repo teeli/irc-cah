@@ -1,7 +1,7 @@
 {
     "server":        "openirc.snt.utwente.nl",
     "nick":          "cah",
-    "notifyUsers":   true,
+    "notifyUsers":   false,
     "clientOptions": {
         "userName":             "cah",
         "channels":             ["#cah"],
