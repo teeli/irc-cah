@@ -95,13 +95,13 @@ var Game = function Game(channel, client, config) {
      */
     self.pause = function () {
         // check if game is already paused
-        if (self.state == STATES.PAUSED) {
+        if (self.state === STATES.PAUSED) {
             self.say('Game is already paused. Type !resume to begin playing again.');
             return false;
         }
         
         // only allow pause if game is in PLAYABLE or PLAYED state
-        if (self.state != STATES.PLAYABLE && self.state != STATES.PLAYED) {
+        if (self.state !== STATES.PLAYABLE && self.state !== STATES.PLAYED) {
             self.say('The game cannot be paused right now.');
             return false;
         }
@@ -124,7 +124,7 @@ var Game = function Game(channel, client, config) {
      */
     self.resume = function () {
         // make sure game is paused
-        if (self.state != STATES.PAUSED) {
+        if (self.state !== STATES.PAUSED) {
             self.say('The game is not paused.');
             return false;
         }
@@ -139,9 +139,9 @@ var Game = function Game(channel, client, config) {
         self.say('Game has been resumed.');
 
         // resume timers
-        if (self.state == STATES.PLAYED) {
+        if (self.state === STATES.PLAYED) {
             self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
-        } else if (self.state == STATES.PLAYABLE) {
+        } else if (self.state === STATES.PLAYABLE) {
             self.turnTimer = setInterval(self.turnTimerCheck, 10 * 1000);
         }
     };
@@ -278,7 +278,7 @@ var Game = function Game(channel, client, config) {
      */
     self.playCard = function (cards, player) {
         // don't allow if game is paused
-        if (self.state == STATES.PAUSED) {
+        if (self.state === STATES.PAUSED) {
             self.say('Game is currently paused.');
             return false;
         }
@@ -426,7 +426,7 @@ var Game = function Game(channel, client, config) {
      */
     self.selectWinner = function (index, player) {
         // don't allow if game is paused
-        if (self.state == STATES.PAUSED) {
+        if (self.state === STATES.PAUSED) {
             self.say('Game is currently paused.');
             return false;
         }
