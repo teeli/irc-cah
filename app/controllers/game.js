@@ -86,6 +86,9 @@ var Game = function Game(channel, client, config) {
         delete self.decks;
         delete self.discards;
         delete self.table;
+
+        // set topic
+        self.setTopic(c.bold.yellow('No game is running. Type !start to begin one!'));
     };
 
     /**
@@ -589,6 +592,26 @@ var Game = function Game(channel, client, config) {
     };
 
     /**
+     * Set the channel topic
+     */
+    self.setTopic = function(topic) {
+        // ignore if not configured to set topic
+        if (typeof config.setTopic === 'undefined' || !config.setTopic) {
+            return false;
+        }
+
+        // construct new topic
+        if (typeof config.topicBase === 'undefined') {
+            var newTopic = topic;
+        } else {
+            var newTopic = topic + ' ' + config.topicBase;
+        }
+
+        // set it
+        client.send('TOPIC', channel, newTopic);
+    };
+
+    /**
      * List all players in the current game
      */
     self.listPlayers = function () {
@@ -640,6 +663,9 @@ var Game = function Game(channel, client, config) {
     self.notice = function (nick, string) {
         self.client.notice(nick, string);
     };
+
+    // set topic
+    self.setTopic(c.bold.lime('A game is running. Type !join to get in on it!'));
 
     // announce the game on the channel
     self.say('A new game of ' + c.rainbow('Cards Against Humanity') + '. The game starts in 30 seconds. Type !join to join the game any time.');
