@@ -14,6 +14,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!list** - List players in the current game.
 * **!status** - Show current status of the game. Output depends on the state of the game (e.g. when waiting for players to play, you can check who hasn't played yet)
 
+Some of these commands reply as notice. If you use [Irssi](http://www.irssi.org), you can use [active_notice.pl](http://scripts.irssi.org/scripts/active_notice.pl) to get notices on the active window instead of status window.
+
 ##Install
 1. Clone the repository.
 2. Edit configuration files with your channel & server settings. 
