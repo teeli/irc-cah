@@ -31,7 +31,10 @@ Main configuration files are located in `config/env`. There are two files by def
 ###Cards
 Card configuration is located in `config/cards` directory. There are 2 files by default, `blacks.json` and `whites.json`, that contain the default cards of the game. You can add your custom cards to the game by creating two new files in the directory, `blacks-custom.json` and `whites-custom.json`, and adding cards in them using the same format as the default card files. Any card you add to these files will also be automatically loaded to the game during start up.
 
-Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now. 
+Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now.
+
+###Notify Users
+Users currently in the channel with the bot can be notified when a game begins by setting the `notifyUsers` directive to true. Users with ~ and & modes are not notified.
 
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.

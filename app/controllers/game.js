@@ -36,6 +36,7 @@ var Game = function Game(channel, client, config) {
     self.config = config; // configuration data
     self.state = STATES.STARTED; // game state storage
     self.points = [];
+    self.notifyUsers = false;
 
     console.log('whites', config.cards.whites);
 
@@ -625,6 +626,40 @@ var Game = function Game(channel, client, config) {
         }
     };
 
+    /*
+     * Notify users in channel that game has started
+     */
+    self.notifyUsers = function() {
+        // request names
+        client.send('NAMES', channel);
+
+        // signal handler to send notifications
+        self.notifyUsers = true;
+    };
+
+    /*
+     * Handle names response to notify users
+     */
+    self.notifyUsersHandler = function(nicks) {
+        // ignore if we haven't requested this
+        if (! self.notifyUsers) {
+            return false;
+        }
+
+        // don't message nicks with these modes
+        var exemptModes = ['~', '&'];
+
+        // loop through and send messages
+        _.each(nicks, function(mode, nick) {
+            if (_.indexOf(exemptModes, mode) < 0 && nick != config.nick) {
+                self.pm(nick, nick + ': A new game of Cards Against Humanity just began in ' + channel + '. Head over and !join if you\'d like to get in on the fun!');
+            }
+        });
+
+        // reset
+        self.notifyUsers = false;
+    };
+
     /**
      * Public message to the game channel
      * @param string
@@ -644,6 +679,11 @@ var Game = function Game(channel, client, config) {
     // announce the game on the channel
     self.say('A new game of ' + c.rainbow('Cards Against Humanity') + '. The game starts in 30 seconds. Type !join to join the game any time.');
 
+    // notify users
+    if (typeof config.notifyUsers !== 'undefined' && config.notifyUsers) {
+        self.notifyUsers();
+    }
+
     // wait for players to join
     self.startTime = new Date();
     self.startTimeout = setTimeout(self.nextRound, 30000);
@@ -652,6 +692,7 @@ var Game = function Game(channel, client, config) {
     client.addListener('part', self.playerLeaveHandler);
     client.addListener('quit', self.playerLeaveHandler);
     client.addListener('nick', self.playerNickChangeHandler);
+    client.addListener('names'+channel, self.notifyUsersHandler);
 };
 
 exports = module.exports = Game;
