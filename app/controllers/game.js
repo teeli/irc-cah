@@ -656,6 +656,9 @@ var Game = function Game(channel, client, config) {
             case STATES.WAITING:
                 self.say(c.bold('Status: ') + 'Not enough players to start. Need ' + playersNeeded + ' more players to start.');
                 break;
+            case STATES.PAUSED:
+                self.say(c.bold('Status: ') + 'Game is paused.');
+                break;
         }
     };
 
