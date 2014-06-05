@@ -5,6 +5,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 ##Commands
 * **!start** - Start a new game.
 * **!stop** - Stop the currently running game.
+* **!pause** - Pause the currently running game.
+* **!resume** - Resume a paused game.
 * **!join** - Join to the currently running game.
 * **!quit** - Quit from the game.
 * **!cards** - Show the cards you have in your hand.
@@ -13,6 +15,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!points** - Show players' *awesome points* in the current game.
 * **!list** - List players in the current game.
 * **!status** - Show current status of the game. Output depends on the state of the game (e.g. when waiting for players to play, you can check who hasn't played yet)
+
+Some of these commands reply as notice. If you use [Irssi](http://www.irssi.org), you can use [active_notice.pl](http://scripts.irssi.org/scripts/active_notice.pl) to get notices on the active window instead of status window.
 
 ##Install
 1. Clone the repository.
@@ -31,15 +35,22 @@ Main configuration files are located in `config/env`. There are two files by def
 ###Cards
 Card configuration is located in `config/cards` directory. Some files are included by default, that contain the default cards of the game plus some extra cards from [BoardGameGeek](http://boardgamegeek.com/). You can add your custom cards to `Custom_a.json` (for answers) and `Custom_q.json` (for questions), using the same format as the default card files. Any card you add to these files will also be automatically loaded to the game during start up..
 
+###Notify Users
+Users currently in the channel with the bot can be notified when a game begins by setting the `notifyUsers` directive to true. Users with ~ and & modes are not notified.
+
+###Set Topic
+The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
+
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
-* Allow pausing/resuming a game.
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
 * The haiku round.
 * Allow players to change one card per round (make it an option in config?)
 
 ##Contribute
 All contributions are welcome in any form, be it pull requests for new features and bug fixes or issue reports or anything else.
+
+It is recommended to use the **develop** branch as a starting point for new features.
 
 ##Thanks
 Special thanks to everyone on the ***super awesome secret IRC channel*** that have helped me test this and given feedback during development.

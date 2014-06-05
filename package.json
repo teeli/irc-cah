@@ -1,6 +1,6 @@
 {
   "name": "irc-cah",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Cards Against Humanity IRC bot",
   "main": "app.js",
   "author": "Teemu Lahti <teemu.lahti@gmail.com>",
@@ -16,7 +16,8 @@
     "irc": "~0.3.6",
     "path": "~0.4.9",
     "irc-colors": "~1.0.3",
-    "jayschema": "~0.2.7"
+    "grunt-nodemon": "~0.2.1",
+    "nodemon": "~1.0.17"
   },
   "devDependencies": {
     "grunt-contrib-watch": "latest",

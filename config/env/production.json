@@ -1,6 +1,9 @@
 {
     "server":        "openirc.snt.utwente.nl",
     "nick":          "cah",
+    "setTopic":      true,
+    "topicBase":     "|| This will be appended to the topic along with the game status.",
+    "notifyUsers":   false,
     "clientOptions": {
         "userName":             "cah",
         "channels":             ["#cah"],
