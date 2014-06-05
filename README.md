@@ -20,7 +20,7 @@ Some of these commands reply as notice. If you use [Irssi](http://www.irssi.org)
 
 ##Install
 1. Clone the repository.
-2. Edit configuration files with your channel & server settings. 
+2. Edit configuration files with your channel & server settings.
 3. Install dependencies using `npm install`.
 
 ###Requirements
@@ -35,19 +35,21 @@ Main configuration files are located in `config/env`. There are two files by def
 ###Cards
 Card configuration is located in `config/cards` directory. There are 2 files by default, `blacks.json` and `whites.json`, that contain the default cards of the game. You can add your custom cards to the game by creating two new files in the directory, `blacks-custom.json` and `whites-custom.json`, and adding cards in them using the same format as the default card files. Any card you add to these files will also be automatically loaded to the game during start up.
 
-Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now. 
+Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now.
 
 ###Set Topic
 The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
 
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
-* Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players. 
+* Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players.
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
 * The haiku round.
 
 ##Contribute
 All contributions are welcome in any form, be it pull requests for new features and bug fixes or issue reports or anything else.
+
+It is recommended to use the **develop** branch as a starting point for new features.
 
 ##Thanks
 Special thanks to everyone on the ***super awesome secret IRC channel*** that have helped me test this and given feedback during development.
