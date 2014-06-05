@@ -37,6 +37,9 @@ Card configuration is located in `config/cards` directory. There are 2 files by 
 
 Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now.
 
+###Notify Users
+Users currently in the channel with the bot can be notified when a game begins by setting the `notifyUsers` directive to true. Users with ~ and & modes are not notified.
+
 ###Set Topic
 The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
 

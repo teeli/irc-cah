@@ -3,6 +3,7 @@
     "nick":          "cah-dev",
     "setTopic":      true,
     "topicBase":     "|| This will be appended to the topic along with the game status.",
+    "notifyUsers":   true,
     "clientOptions": {
         "userName":             "cah",
         "debug":                true,
