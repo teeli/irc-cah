@@ -102,13 +102,13 @@ var Game = function Game(channel, client, config) {
             self.say('Game is already paused. Type !resume to begin playing again.');
             return false;
         }
-        
+
         // only allow pause if game is in PLAYABLE or PLAYED state
         if (self.state !== STATES.PLAYABLE && self.state !== STATES.PLAYED) {
             self.say('The game cannot be paused right now.');
             return false;
         }
-        
+
         // store state and pause game
         var now = new Date();
         self.pauseState.state = self.state;
@@ -121,7 +121,7 @@ var Game = function Game(channel, client, config) {
         clearTimeout(self.turnTimer);
         clearTimeout(self.winnerTimer);
     };
-    
+
     /**
      * Resume game
      */
@@ -131,7 +131,7 @@ var Game = function Game(channel, client, config) {
             self.say('The game is not paused.');
             return false;
         }
-        
+
         // resume game
         var now = new Date();
         var newTime = new Date();
@@ -668,7 +668,7 @@ var Game = function Game(channel, client, config) {
     /**
      * Set the channel topic
      */
-    self.setTopic = function(topic) {
+    self.setTopic = function (topic) {
         // ignore if not configured to set topic
         if (typeof config.setTopic === 'undefined' || !config.setTopic) {
             return false;
