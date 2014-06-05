@@ -629,7 +629,12 @@ var Game = function Game(channel, client, config) {
     /*
      * Notify users in channel that game has started
      */
-    self.notifyUsers = function() {
+    self.sendNotifications = function() {
+        // ignore if config not set
+        if (typeof config.notifyUsers === 'undefined' || config.notifyUsers === false) {
+            return false;
+        }
+
         // request names
         client.send('NAMES', channel);
 
@@ -680,9 +685,7 @@ var Game = function Game(channel, client, config) {
     self.say('A new game of ' + c.rainbow('Cards Against Humanity') + '. The game starts in 30 seconds. Type !join to join the game any time.');
 
     // notify users
-    if (typeof config.notifyUsers !== 'undefined' && config.notifyUsers) {
-        self.notifyUsers();
-    }
+    self.sendNotifications();
 
     // wait for players to join
     self.startTime = new Date();
