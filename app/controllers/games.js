@@ -77,7 +77,8 @@ var Games = function Games() {
      self.pause = function(client, message, cmdArgs) {
          var channel = message.args[0],
             nick = message.nick,
-            hostname = message.user + '@' + message.host,
+            user = message.user,
+            hostname = message.host,
             game = self.findGame(channel);
         if (typeof game === 'undefined') {
             client.say(channel, 'No game running. Start the game by typing !start.');
@@ -88,7 +89,7 @@ var Games = function Games() {
             }
         }
      };
-     
+
     /**
      * Resume a game
      * @param client
@@ -98,7 +99,8 @@ var Games = function Games() {
      self.resume = function(client, message, cmdArgs) {
          var channel = message.args[0],
             nick = message.nick,
-            hostname = message.user + '@' + message.host,
+            user = message.user,
+            hostname = message.host,
             game = self.findGame(channel);
         if (typeof game === 'undefined') {
             client.say(channel, 'No game running. Start the game by typing !start.');
