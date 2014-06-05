@@ -69,6 +69,48 @@ var Games = function Games() {
     };
 
     /**
+     * Pause a game
+     * @param client
+     * @param message
+     * @param cmdArgs
+     */
+     self.pause = function(client, message, cmdArgs) {
+         var channel = message.args[0],
+            nick = message.nick,
+            hostname = message.user + '@' + message.host,
+            game = self.findGame(channel);
+        if (typeof game === 'undefined') {
+            client.say(channel, 'No game running. Start the game by typing !start.');
+        } else {
+            var player = game.getPlayer({nick: nick, hostname: hostname});
+            if (typeof(player) !== 'undefined') {
+                game.pause();
+            }
+        }
+     };
+     
+    /**
+     * Resume a game
+     * @param client
+     * @param message
+     * @param cmdArgs
+     */
+     self.resume = function(client, message, cmdArgs) {
+         var channel = message.args[0],
+            nick = message.nick,
+            hostname = message.user + '@' + message.host,
+            game = self.findGame(channel);
+        if (typeof game === 'undefined') {
+            client.say(channel, 'No game running. Start the game by typing !start.');
+        } else {
+            var player = game.getPlayer({nick: nick, hostname: hostname});
+            if (typeof(player) !== 'undefined') {
+                game.resume();
+            }
+        }
+     };
+
+    /**
      * Add player to game
      * @param client
      * @param message

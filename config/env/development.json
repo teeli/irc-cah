@@ -1,6 +1,8 @@
 {
     "server":        "irc.saunalahti.fi",
     "nick":          "cah-dev",
+    "setTopic":      true,
+    "topicBase":     "|| This will be appended to the topic along with the game status.",
     "clientOptions": {
         "userName":             "cah",
         "debug":                true,

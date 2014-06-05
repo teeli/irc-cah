@@ -14,7 +14,8 @@ var STATES = {
     PLAYABLE:  'Playable',
     PLAYED:    'Played',
     ROUND_END: 'RoundEnd',
-    WAITING:   'Waiting'
+    WAITING:   'Waiting',
+    PAUSED:    'Paused'
 };
 
 // TODO: Implement the ceremonial haiku round that ends the game
@@ -35,6 +36,7 @@ var Game = function Game(channel, client, config) {
     self.client = client; // reference to the irc client
     self.config = config; // configuration data
     self.state = STATES.STARTED; // game state storage
+    self.pauseState = []; // pause state storage
     self.points = [];
 
     console.log('whites', config.cards.whites);
@@ -89,6 +91,65 @@ var Game = function Game(channel, client, config) {
         delete self.decks;
         delete self.discards;
         delete self.table;
+
+        // set topic
+        self.setTopic(c.bold.yellow('No game is running. Type !start to begin one!'));
+    };
+
+    /**
+     * Pause game
+     */
+    self.pause = function () {
+        // check if game is already paused
+        if (self.state === STATES.PAUSED) {
+            self.say('Game is already paused. Type !resume to begin playing again.');
+            return false;
+        }
+
+        // only allow pause if game is in PLAYABLE or PLAYED state
+        if (self.state !== STATES.PLAYABLE && self.state !== STATES.PLAYED) {
+            self.say('The game cannot be paused right now.');
+            return false;
+        }
+
+        // store state and pause game
+        var now = new Date();
+        self.pauseState.state = self.state;
+        self.pauseState.elapsed = now.getTime() - self.roundStarted.getTime();
+        self.state = STATES.PAUSED;
+
+        self.say('Game is now paused. Type !resume to begin playing again.');
+
+        // clear turn timers
+        clearTimeout(self.turnTimer);
+        clearTimeout(self.winnerTimer);
+    };
+
+    /**
+     * Resume game
+     */
+    self.resume = function () {
+        // make sure game is paused
+        if (self.state !== STATES.PAUSED) {
+            self.say('The game is not paused.');
+            return false;
+        }
+
+        // resume game
+        var now = new Date();
+        var newTime = new Date();
+        newTime.setTime(now.getTime() - self.pauseState.elapsed);
+        self.roundStarted = newTime;
+        self.state = self.pauseState.state;
+
+        self.say('Game has been resumed.');
+
+        // resume timers
+        if (self.state === STATES.PLAYED) {
+            self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
+        } else if (self.state === STATES.PLAYABLE) {
+            self.turnTimer = setInterval(self.turnTimerCheck, 10 * 1000);
+        }
     };
 
     /**
@@ -222,6 +283,12 @@ var Game = function Game(channel, client, config) {
      * @param player Player who played the cards
      */
     self.playCard = function (cards, player) {
+        // don't allow if game is paused
+        if (self.state === STATES.PAUSED) {
+            self.say('Game is currently paused.');
+            return false;
+        }
+
         console.log(player.nick + ' played cards', cards.join(', '));
         // make sure different cards are played
         cards = _.uniq(cards);
@@ -285,6 +352,7 @@ var Game = function Game(channel, client, config) {
         } else if (roundElapsed >= timeLimit - (60 * 1000) && roundElapsed < timeLimit - (50 * 1000)) {
             // 60s ... 50s left
             self.say('Hurry up, 1 minute left!');
+            self.showStatus();
         }
     };
 
@@ -364,6 +432,12 @@ var Game = function Game(channel, client, config) {
      * @param player Player who said the command (use null for internal calls, to ignore checking)
      */
     self.selectWinner = function (index, player) {
+        // don't allow if game is paused
+        if (self.state === STATES.PAUSED) {
+            self.say('Game is currently paused.');
+            return false;
+        }
+
         // clear winner timer
         clearInterval(self.winnerTimer);
 
@@ -597,7 +671,29 @@ var Game = function Game(channel, client, config) {
             case STATES.WAITING:
                 self.say(c.bold('Status: ') + 'Not enough players to start. Need ' + playersNeeded + ' more players to start.');
                 break;
+            case STATES.PAUSED:
+                self.say(c.bold('Status: ') + 'Game is paused.');
+                break;
         }
+    };
+
+    /**
+     * Set the channel topic
+     */
+    self.setTopic = function (topic) {
+        // ignore if not configured to set topic
+        if (typeof config.setTopic === 'undefined' || !config.setTopic) {
+            return false;
+        }
+
+        // construct new topic
+        var newTopic = topic;
+        if (typeof config.topicBase !== 'undefined') {
+            newTopic = topic + ' ' + config.topicBase;
+        }
+
+        // set it
+        client.send('TOPIC', channel, newTopic);
     };
 
     /**
@@ -652,6 +748,9 @@ var Game = function Game(channel, client, config) {
     self.notice = function (nick, string) {
         self.client.notice(nick, string);
     };
+
+    // set topic
+    self.setTopic(c.bold.lime('A game is running. Type !join to get in on it!'));
 
     // announce the game on the channel
     self.say('A new game of ' + c.rainbow('Cards Against Humanity') + '. The game starts in 30 seconds. Type !join to join the game any time.');

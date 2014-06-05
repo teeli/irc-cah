@@ -5,6 +5,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 ##Commands
 * **!start** - Start a new game.
 * **!stop** - Stop the currently running game.
+* **!pause** - Pause the currently running game.
+* **!resume** - Resume a paused game.
 * **!join** - Join to the currently running game.
 * **!quit** - Quit from the game.
 * **!cards** - Show the cards you have in your hand.
@@ -13,6 +15,8 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!points** - Show players' *awesome points* in the current game.
 * **!list** - List players in the current game.
 * **!status** - Show current status of the game. Output depends on the state of the game (e.g. when waiting for players to play, you can check who hasn't played yet)
+
+Some of these commands reply as notice. If you use [Irssi](http://www.irssi.org), you can use [active_notice.pl](http://scripts.irssi.org/scripts/active_notice.pl) to get notices on the active window instead of status window.
 
 ##Install
 1. Clone the repository.
@@ -33,9 +37,11 @@ Card configuration is located in `config/cards` directory. There are 2 files by 
 
 Black cards are what players draw from the deck to their hands, white cards are the "question cards". Yes, this is the opposite of the original Cards Against Humanity. No, it wasn't done intentionally, but that's the way it is now. 
 
+###Set Topic
+The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
+
 ##TODO
 * Save game & player data to MongoDB for all time top scores & other statistics.
-* Allow pausing/resuming a game.
 * Move some of the America specific cards to separate MURICA-deck, that can be enabled/disabled from config for non-american players. 
 * Config options for rule variations, such as voting the best instead of card czar choosing the winner.
 * The haiku round.
