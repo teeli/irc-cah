@@ -675,10 +675,9 @@ var Game = function Game(channel, client, config) {
         }
 
         // construct new topic
-        if (typeof config.topicBase === 'undefined') {
-            var newTopic = topic;
-        } else {
-            var newTopic = topic + ' ' + config.topicBase;
+        var newTopic = topic;
+        if (typeof config.topicBase !== 'undefined') {
+            newTopic = topic + ' ' + config.topicBase;
         }
 
         // set it
