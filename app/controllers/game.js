@@ -155,7 +155,15 @@ var Game = function Game(channel, client, config) {
 
         // resume timers
         if (self.state === STATES.PLAYED) {
-            self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
+            // check if czar quit during pause
+            if(self.players.indexOf(self.czar) < 0) {
+                // no czar
+                self.say('The czar quit the game during pause. I will pick the winner on this round.');
+                // select winner
+                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+            } else {
+                self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
+            }
         } else if (self.state === STATES.PLAYABLE) {
             self.turnTimer = setInterval(self.turnTimerCheck, 10 * 1000);
         }
