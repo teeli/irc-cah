@@ -160,7 +160,7 @@ var Game = function Game(channel, client, config) {
                 // no czar
                 self.say('The czar quit the game during pause. I will pick the winner on this round.');
                 // select winner
-                self.selectWinner(Math.round(Math.random() * (self.table.black.length - 1)));
+                self.selectWinner(Math.round(Math.random() * (self.table.answer.length - 1)));
             } else {
                 self.winnerTimer = setInterval(self.winnerTimerCheck, 10 * 1000);
             }
@@ -584,7 +584,7 @@ var Game = function Game(channel, client, config) {
             // put player's cards to discard
             _.each(cards, function (card) {
                 console.log('Add card ', card.text, 'to discard');
-                self.discards.black.addCard(card);
+                self.discards.answer.addCard(card);
             });
             if (options.silent !== true) {
                 self.say(player.nick + ' has left the game');
