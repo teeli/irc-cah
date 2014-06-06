@@ -14,14 +14,7 @@ var Games = function Games() {
      * @returns {*}
      */
     self.findGame = function (channel) {
-        var game;
-        // TODO: Replace with filter or something
-        _.each(self.games, function (g) {
-            if (g.channel === channel) {
-                game = g;
-            }
-        });
-        return game;
+        return _.findWhere(self.games, {channel: channel});
     };
 
     /**

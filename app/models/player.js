@@ -3,7 +3,7 @@ var _ = require('underscore'),
 
 var Player = function Player(nick, user, hostname) {
     var self = this;
-    self.id = _.uniqueId();
+    self.id = _.uniqueId('card');
     self.nick = nick;
     self.user = user;
     self.hostname = hostname;

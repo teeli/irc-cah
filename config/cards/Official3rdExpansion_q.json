@@ -1,0 +1,194 @@
+[
+  {
+    "type": "Question",
+    "value": "%s. Awesome in theory, kind of a mess in practice.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "%s: Hours of fun. Easy to use. Perfect for %s!",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "A successful job interview begins with a firm handshake and ends with %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "After months of practice with %s, I think I’m finally ready for %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "And what did you bring for show and tell?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "As part of his contract, Prince won’t perform without %s in his dressing room.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Call the law offices of Goldstein & Goldstein, because no one should have to tolerate %s in the workplace.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "During high school I never really fit in until I found %s club.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Finally! A service that delivers %s right to your door.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Having problems with %s? Try %s!",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Hey baby, come back to my place and I’ll show you %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "I’m not like the rest of you. I’m too rich and busy for %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "In the seventh circle of Hell, sinners must endure %s for all eternity.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Listen, son. If you want to get involved with %s, I won’t stop you. Just steer clear of %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Lovin’ you is easy ’cause you’re %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Money can’t buy me love, but it can buy me %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "My gym teacher got fired for adding %s to the obstacle course.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "My life is ruled by a vicious cycle of %s and %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "The blind date was going horribly until we discovered our shared interest in %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "To prepare for his upcoming role, Daniel Day-Lewis immersed himself in the world of %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Turns out that %s-Man was neither the hero we needed nor wanted.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "What left this stain on my couch?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "When you get right down to it, %s is just %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "With enough time and pressure, %s will turn into %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 3rd Expansion"
+  }
+]

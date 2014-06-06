@@ -1,0 +1,58 @@
+[
+  {
+    "type": "Question",
+    "value": "After Billy Mays died, he sold God %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Chili's special tonight: %s with a side of %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Instead of endorsing Jell-O Pudding Pops, Bill Cosby now endorses %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Mr. Owl, how many licks does it take to get to the center of %s?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Sizzler's special tonight: %s with a side of %s.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "You're listening to KB969, %s radio!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What makes Fred Phelps hard?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  }
+]
