@@ -56,8 +56,11 @@ var Games = function Games() {
         if (typeof game === 'undefined') {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
-            game.stop(game.getPlayer({user: user, hostname: hostname}));
-            self.games = _.without(self.games, game);
+            var player = game.getPlayer({user: user, hostname: hostname});
+            if (typeof(player) !== 'undefined') {
+                game.stop(game.getPlayer({user: user, hostname: hostname}));
+                self.games = _.without(self.games, game);
+            }
         }
     };
 
@@ -216,7 +219,9 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             var player = game.getPlayer({user: user, hostname: hostname});
-            game.selectWinner(cmdArgs[0], player);
+            if (typeof(player) !== 'undefined') {
+                game.selectWinner(cmdArgs[0], player);
+            }
         }
     };
 
