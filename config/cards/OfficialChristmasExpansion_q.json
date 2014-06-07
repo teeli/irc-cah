@@ -1,0 +1,58 @@
+[
+  {
+    "type": "Question",
+    "value": "After blacking out during New Year's Eve, I was awoken by %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "Every Christmas, my uncle gets drunk and tells the story about %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "Jesus is %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "On the third day of Christmas, my true love gave to me: three French hens, two turtle doves and %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "This holiday season, Tim Allen must overcome his fear of %s to save Christmas.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "Wake up, America. Christmas is under attack by secular liberals and their %s.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  },
+  {
+    "type": "Question",
+    "value": "What keeps me warm during the cold, cold winter?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official Christmas Set"
+  }
+]
