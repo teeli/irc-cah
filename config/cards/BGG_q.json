@@ -545,7 +545,7 @@
   },
   {
     "type": "Question",
-    "value": "I have decided to commit to a life of studious contemplation on%s.",
+    "value": "I have decided to commit to a life of studious contemplation on %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
