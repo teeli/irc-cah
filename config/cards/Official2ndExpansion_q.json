@@ -35,8 +35,8 @@
     "type": "Question",
     "value": "I went from %s to %s, all thanks to %s.",
     "keep": "Yes",
-    "draw": 1,
-    "pick": 2,
+    "draw": 2,
+    "pick": 3,
     "source": "CaH Official 2nd Expansion"
   },
   {
