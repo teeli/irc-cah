@@ -849,7 +849,7 @@
   },
   {
     "type": "Question",
-    "value": "Moral at work was boosted when they put%s in the vending machines.",
+    "value": "Moral at work was boosted when they put %s in the vending machines.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
@@ -865,7 +865,7 @@
   },
   {
     "type": "Question",
-    "value": "My favorite childhood memory is%s.",
+    "value": "My favorite childhood memory is %s.",
     "keep": "Yes",
     "draw": 0,
     "pick": 1,
