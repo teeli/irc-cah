@@ -4,6 +4,20 @@
     "setTopic":      true,
     "topicBase":     "|| This will be appended to the topic along with the game status.",
     "notifyUsers":   false,
+    "connectCommands": [
+        {
+            "target": "",
+            "message": ""
+        }
+    ],
+    "joinCommands": {
+        "#cah": [
+            {
+                "target": "",
+                "message": ""
+            }
+        ]
+    },
     "clientOptions": {
         "userName":             "cah",
         "channels":             ["#cah"],

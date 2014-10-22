@@ -12,7 +12,7 @@ function checkUserMode(message, mode) {
 /**
  * Initialize the bot
  */
-exports.init = function() {
+exports.init = function () {
     console.log('Initializing...');
     // init irc client
     console.log('Connecting to ' + config.server + ' as ' + config.nick + '...');
@@ -21,11 +21,27 @@ exports.init = function() {
     // handle connection to server for logging
     client.addListener('registered', function (message) {
         console.log('Connected to server ' + message.server);
+        // Send connect commands after joining a server
+        if (typeof config.connectCommands !== 'undefined' && config.connectCommands.length > 0) {
+            _.each(config.connectCommands, function (cmd) {
+                if(cmd.target && cmd.message) {
+                    client.say(cmd.target, cmd.message);
+                }
+            });
+        }
     });
 
     // handle joins to channels for logging
     client.addListener('join', function (channel, nick, message) {
         console.log('Joined ' + channel + ' as ' + nick);
+        // Send join command after joining a channel
+        if (typeof config.joinCommands !== 'undefined' && config.joinCommands.hasOwnProperty(channel) && config.joinCommands[channel].length > 0) {
+            _.each(config.joinCommands[channel], function (cmd) {
+                if(cmd.target && cmd.message) {
+                    client.say(cmd.target, cmd.message);
+                }
+            });
+        }
     });
 
     // output errors
@@ -85,8 +101,8 @@ exports.init = function() {
  */
 exports.cmd = function (cmd, mode, cb) {
     commands.push({
-        cmd:      cmd,
-        mode:     mode,
+        cmd: cmd,
+        mode: mode,
         callback: cb
     });
 };
@@ -99,8 +115,8 @@ exports.cmd = function (cmd, mode, cb) {
  */
 exports.msg = function (cmd, mode, cb) {
     msgs.push({
-        cmd:      cmd,
-        mode:     mode,
+        cmd: cmd,
+        mode: mode,
         callback: cb
     });
 };
