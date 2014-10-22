@@ -76,7 +76,7 @@ This example will send you a private message when the bot has connected to serve
 		},
 		{
 			"target": "yournick",
-			"message": I just joined #awesomechannel."
+			"message": "I just joined #awesomechannel."
 		}
 	]
 }
