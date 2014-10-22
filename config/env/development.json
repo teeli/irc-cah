@@ -1,14 +1,32 @@
 {
-    "server":        "irc.saunalahti.fi",
-    "nick":          "cah-dev",
-    "setTopic":      true,
-    "topicBase":     "|| This will be appended to the topic along with the game status.",
-    "notifyUsers":   true,
+    "server": "irc.saunalahti.fi",
+    "nick": "cah-dev",
+    "setTopic": true,
+    "topicBase": "|| This will be appended to the topic along with the game status.",
+    "notifyUsers": true,
+    "connectCommands": [
+        {
+            "target": "teel",
+            "message": "I connected to server"
+        }
+    ],
+    "joinCommands": {
+        "#pi-cah-dev": [
+            {
+                "target": "teel",
+                "message": "I joined the dev channel"
+            },
+            {
+                "target": "#pi-cah-dev",
+                "message": "Hello guys"
+            }
+        ]
+    },
     "clientOptions": {
-        "userName":             "cah",
-        "debug":                true,
-        "channels":             ["#pi-cah-dev"],
-        "floodProtection":      true,
+        "userName": "cah",
+        "debug": true,
+        "channels": ["#pi-cah-dev"],
+        "floodProtection": true,
         "floodProtectionDelay": 2000
     }
 }
