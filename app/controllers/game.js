@@ -852,4 +852,7 @@ var Game = function Game(channel, client, config, cmdArgs) {
     client.addListener('names'+channel, self.notifyUsersHandler);
 };
 
+// export static state constant
+Game.STATES = STATES;
+
 exports = module.exports = Game;
