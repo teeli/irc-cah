@@ -3,7 +3,7 @@
 IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthumanity.com/) in IRC. The game is running in IRCnet on #cah, but you can just as easily run your own instance on your own channel for more private games.
 
 ##Commands
-* **!start** - Start a new game.
+* **!start #** - Start a new game. Optional parameter can by used to set a point limit for the game (e.g. `!start 10` to play until one player has 10 points.)
 * **!stop** - Stop the currently running game.
 * **!pause** - Pause the currently running game.
 * **!resume** - Resume a paused game.
@@ -15,6 +15,7 @@ IRC bot that let's you play [Cards Against Humanity](http://www.cardsagainsthuma
 * **!points** - Show players' *awesome points* in the current game.
 * **!list** - List players in the current game.
 * **!status** - Show current status of the game. Output depends on the state of the game (e.g. when waiting for players to play, you can check who hasn't played yet)
+* **!pick** - Alias for !play and !winner commands.
 
 Some of these commands reply as notice. If you use [Irssi](http://www.irssi.org), you can use [active_notice.pl](http://scripts.irssi.org/scripts/active_notice.pl) to get notices on the active window instead of status window.
 
@@ -42,6 +43,11 @@ Users currently in the channel with the bot can be notified when a game begins b
 
 ###Set Topic
 The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
+
+###Point Limit
+You can set a default point limit in the configuration file by settings the `pointLimit` to any positive number. The game stops when a player reaches this point limit. 0 or a negative number means no point limit and games are played until `!stop` command is entered.
+
+Additionally point limit can be set on a per game basis as a parameter for the `!start` command (see *Commands*).
 
 ###Connect and join command examples
 

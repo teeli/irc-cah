@@ -25,7 +25,15 @@ var HAIKU = new Card({
     "value": "(Draw 2, Pick 3) Make a haiku."
 });
 
-var Game = function Game(channel, client, config) {
+/**
+ * A single game object that handles all operations in a game
+ * @param channel The channel the game is running on
+ * @param client The IRC client object
+ * @param config Configuration variables
+ * @param cmdArgs !start command arguments
+ * @constructor
+ */
+var Game = function Game(channel, client, config, cmdArgs) {
     var self = this;
 
     // properties
@@ -39,6 +47,7 @@ var Game = function Game(channel, client, config) {
     self.pauseState = []; // pause state storage
     self.points = [];
     self.notifyUsersPending = false;
+    self.pointLimit = 0; // point limit for the game, defaults to 0 (== no limit)
 
     console.log('Loaded', config.cards.length, 'cards:');
     var questions = _.filter(config.cards, function(card) {
@@ -69,15 +78,26 @@ var Game = function Game(channel, client, config) {
     self.decks.question.shuffle();
     self.decks.answer.shuffle();
 
+    // parse point limit from configuration file
+    if(typeof config.pointLimit !== 'undefined' && !isNaN(config.pointLimit)) {
+        console.log('Set game point limit to ' + config.pointLimit + ' from config');
+        self.pointLimit = parseInt(config.pointLimit);
+    }
+    // parse point limit from command arguments
+    if(typeof cmdArgs[0] !==  'undefined' && !isNaN(cmdArgs[0])) {
+        console.log('Set game point limit to ' + cmdArgs[0] + ' from arguments');
+        self.pointLimit = parseInt(cmdArgs[0]);
+    }
+
     /**
      * Stop game
      */
-    self.stop = function (player) {
+    self.stop = function (player, pointLimitReached) {
         self.state = STATES.STOPPED;
 
-        if (typeof player !== 'undefined') {
+        if (typeof player !== 'undefined' && player !== null) {
             self.say(player.nick + ' stopped the game.');
-        } else {
+        } else if (pointLimitReached !== true) {
             self.say('Game has been stopped.');
         }
         if(self.round > 1) {
@@ -91,7 +111,7 @@ var Game = function Game(channel, client, config) {
         clearTimeout(self.turnTimer);
         clearTimeout(self.winnerTimer);
 
-        // Destroy cards & players
+        // Destroy game properties
         delete self.players;
         delete self.config;
         delete self.client;
@@ -174,6 +194,17 @@ var Game = function Game(channel, client, config) {
      */
     self.nextRound = function () {
         clearTimeout(self.stopTimeout);
+        // check if any player reached the point limit
+        if(self.pointLimit > 0) {
+            var winner = _.findWhere(self.players, {points: self.pointLimit});
+            if(winner) {
+                self.say(winner.nick + ' has the limit of ' + self.pointLimit + ' awesome points and is the winner of the game! Congratulations!');
+                self.stop(null, true);
+                return false;
+            }
+        }
+
+        // check that there's enough players in the game
         if (self.players.length < 3) {
             self.say('Not enough players to start a round (need at least 3). Waiting for others to join. Stopping in 3 minutes if not enough players.');
             self.state = STATES.WAITING;
@@ -820,5 +851,8 @@ var Game = function Game(channel, client, config) {
     client.addListener('nick', self.playerNickChangeHandler);
     client.addListener('names'+channel, self.notifyUsersHandler);
 };
+
+// export static state constant
+Game.STATES = STATES;
 
 exports = module.exports = Game;

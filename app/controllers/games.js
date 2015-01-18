@@ -35,7 +35,7 @@ var Games = function Games() {
             client.say(channel, 'A game is already running. Type !join to join the game.');
         } else {
             // init game
-            var game = new Game(channel, client, config);
+            var game = new Game(channel, client, config, cmdArgs);
             self.games.push(game);
             var player = new Player(nick, user, hostname);
             game.addPlayer(player);
@@ -255,6 +255,31 @@ var Games = function Games() {
             client.say(channel, 'No game running. Start the game by typing !start.');
         } else {
             game.showStatus();
+        }
+    };
+
+    self.pick = function (client, message, cmdArgs)
+    {
+        // check if everyone has played and end the round
+        var channel = message.args[0],
+            user = message.user,
+            hostname = message.host,
+            game = self.findGame(channel);
+
+        if (typeof game === 'undefined'){
+            client.say(channel, 'No game running. Start the game by typing !start.');
+        } else {
+            var player = game.getPlayer({user: user, hostname: hostname});
+
+            if (typeof(player) !== 'undefined') {
+                if (game.state === Game.STATES.PLAYED) {
+                    game.selectWinner(cmdArgs[0], player);
+                } else if (game.state === Game.STATES.PLAYABLE) {
+                    game.playCard(cmdArgs, player);
+                } else {
+                    client.say(channel, '!pick command not available in current state.');
+                }
+            }
         }
     };
 };
