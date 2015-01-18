@@ -35,7 +35,7 @@ var Games = function Games() {
             client.say(channel, 'A game is already running. Type !join to join the game.');
         } else {
             // init game
-            var game = new Game(channel, client, config);
+            var game = new Game(channel, client, config, cmdArgs);
             self.games.push(game);
             var player = new Player(nick, user, hostname);
             game.addPlayer(player);

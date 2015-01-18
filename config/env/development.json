@@ -4,18 +4,15 @@
     "setTopic": true,
     "topicBase": "|| This will be appended to the topic along with the game status.",
     "notifyUsers": true,
+    "pointLimit": 1,
     "connectCommands": [
         {
-            "target": "teel",
-            "message": "I connected to server"
+            "target": "",
+            "message": ""
         }
     ],
     "joinCommands": {
         "#pi-cah-dev": [
-            {
-                "target": "teel",
-                "message": "I joined the dev channel"
-            },
             {
                 "target": "#pi-cah-dev",
                 "message": "Hello guys"
