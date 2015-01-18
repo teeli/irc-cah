@@ -45,7 +45,7 @@ Users currently in the channel with the bot can be notified when a game begins b
 The bot can be configured to set the channel topic indicating whether a game is running or not by setting the `setTopic` directive to true. The `topicBase` directive will be appended to the end of the status information. The bot must have permission in the channel for this to work.
 
 ###Point Limit
-You can set a default point limit in the configuration file by settings the `pointLimit` to any positive number. The game stops when a player reaches this point limit. 0 or a negative number means no point limit and games are played until !stop command is enterd.
+You can set a default point limit in the configuration file by settings the `pointLimit` to any positive number. The game stops when a player reaches this point limit. 0 or a negative number means no point limit and games are played until `!stop` command is entered.
 
 Additionally point limit can be set on a per game basis as a parameter for the `!start` command (see *Commands*).
 

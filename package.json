@@ -1,6 +1,6 @@
 {
   "name": "irc-cah",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Cards Against Humanity IRC bot",
   "main": "app.js",
   "author": "Teemu Lahti <teemu.lahti@gmail.com>",
