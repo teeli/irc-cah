@@ -258,6 +258,12 @@ var Games = function Games() {
         }
     };
 
+    /**
+     * Alias command for winner and play
+     * @param client
+     * @param message
+     * @param cmdArgs
+     */
     self.pick = function (client, message, cmdArgs)
     {
         // check if everyone has played and end the round
